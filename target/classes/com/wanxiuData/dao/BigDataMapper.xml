@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanxiuData.dao.BigDataMapper">
+    <select id="findOldCount" resultType="java.lang.Integer">
+        select count(*) from oldpeopleinfo where status!=0;
+    </select>
+    <select id="CountService" resultType="java.lang.Integer">
+        select count(*) from userordergenerate where orderStatus!=0;
+    </select>
+    <select id="CountOrderEvaluate" resultType="java.lang.Integer">
+        select count(*) from orderevaluation where score=5
+        union all select count(*) from orderevaluation where score=4
+        union all select count(*) from orderevaluation where score=3
+        union all select count(*) from orderevaluation where score=2
+        union all select count(*) from orderevaluation where score=1
+    </select>
+</mapper>

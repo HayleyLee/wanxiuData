@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanxiuData.dao.GovernmentMapper">
+    <select id="AllPeopleCount" resultType="java.lang.Integer">
+        select count(*) from oldpeopleinfo where clientType=24 || clientType=28 || clientType=25 || clientType=31 || clientType=42 || clientType=43 || clientType=49 || clientType=50 || clientType=51 || clientType=52
+    </select>
+    <select id="AllOrderCount" resultType="java.lang.Integer">
+        select count(u.orderId)
+        from userordergenerate u,oldpeopleinfo o
+        where u.consigneeName=o.cusname and u.orderStatus=4 and
+        (o.clientType=24 ||
+        o.clientType=28 ||
+        o.clientType=25 ||
+        o.clientType=31 ||
+        o.clientType=42 ||
+        o.clientType=43 ||
+        o.clientType=49 ||
+        o.clientType=50 ||
+        o.clientType=51 ||
+        o.clientType=52)
+    </select>
+    <select id="CountAllPhoneUser" resultType="java.lang.Integer">
+        select count(*) from oldpeopleinfo where equipmentId is not null and equipmentId != ""
+    </select>
+    <select id="CountAllRingUser" resultType="java.lang.Integer">
+        select count(*) from oldpeopleinfo where ringNum is not null and ringNum != ""
+    </select>
+    <select id="CountSumHomeUser" resultType="java.lang.Integer">
+        select count(*) from oldpeopleinfo where clientType=35 || clientType=37 || clientType=47
+    </select>
+    <select id="CountSumHomeOrder" resultType="java.lang.Integer">
+        select count(u.orderId)
+        from userordergenerate u,oldpeopleinfo o
+        where u.consigneeName=o.cusname and u.orderStatus=4 and
+        (o.clientType=35 ||
+        o.clientType=37 ||
+        o.clientType=47)
+    </select>
+    <select id="CountSumHomeUserByLocation" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        select count(*) from oldpeopleinfo where clientType=#{location}
+    </select>
+    <select id="CountSumHomeOrderByMerchants" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from userordergenerate u,oldpeopleinfo o
+        where u.consigneeName=o.cusname and u.orderStatus=4 and merchantName like #{merchants} and
+        (o.clientType=35 ||
+        o.clientType=37 ||
+        o.clientType=47)
+    </select>
+    <select id="CountSumHomeOrderByNoMerchants" resultType="java.lang.Integer">
+        select count(*) from userordergenerate u,oldpeopleinfo o
+        where u.consigneeName=o.cusname
+        and u.orderStatus=4
+        and merchantName not like '%手机%'
+        and merchantName not like '%心理%'
+        and merchantName not like '%生活%'
+        and merchantName not like '%康复%'
+        and merchantName not like '%餐%'
+        and merchantName not like '%线上服务%'
+        and merchantName not like '%针%'
+        and(o.clientType=35 ||
+        o.clientType=37 ||
+        o.clientType=47)
+    </select>
+    <select id="CountNormalGovernmentUser" resultType="java.lang.Integer">
+        select count(*) from oldpeopleinfo where clientType=#{clientType} and hometownAreaCode like #{areaCode} and status!=0
+    </select>
+    <select id="CountNormalGovernmentChangzhouUser" resultType="java.lang.Integer">
+        select count(*) from oldpeopleinfo where hometownAreaCode like #{areaCode} and status!=0 and(clientType=31 || clientType=42 || clientType=43)
+    </select>
+    <select id="CountNoNormalGovernmentUser" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(*) from oldpeopleinfo where clientType=#{clientType}
+    </select>
+    <select id="CountGovernmentOrderByLocationAndMerchantName" resultType="java.lang.Integer">
+        select count(o.orderId) from userordergenerate o,oldpeopleinfo u where o.consigneeName=u.cusname and u.hometownAreaCode like #{location} and u.status!=0 and u.clientType=31 and o.merchantName like #{merchantName}
+    </select>
+    <select id="CountGovernmentOrderByLocation" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(o.orderId) from userordergenerate o,oldpeopleinfo u where o.consigneeName=u.cusname and u.hometownAreaCode like #{location} and u.status!=0 and u.clientType=31 and o.merchantName not like '%生活%' and o.merchantName not like '%康复%'
+    </select>
+    <select id="OrderAnalysis" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from userordergenerate u,oldpeopleinfo o
+        where o.cusname=u.consigneeName and
+        orderStatus=4 and
+        o.hometownAreaCode like #{locationCode} and
+        u.orderTime like #{time} and
+        u.merchantName like #{merchantName}
+    </select>
+    <select id="OtherOrderAnalysis" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from userordergenerate u,oldpeopleinfo o
+        where o.cusname=u.consigneeName and
+        o.hometownAreaCode like #{locationCode} and
+        orderTime like #{time} and
+        orderStatus=4 and
+        merchantName not like '%康复%' and
+        merchantName not like '%生活%'
+    </select>
+</mapper>

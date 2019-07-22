@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanxiuData.dao.UserMapper">
+
+    <resultMap id="OldPeopleMap" type="com.wanxiuData.entity.OldPeople" >
+        <result property="OrderId" column="OrderId"/>
+    </resultMap>
+
+    <resultMap id="UserMapper" type="com.wanxiuData.entity.User">
+        <result property="adminId" column="adminId"/>
+        <result property="loginName" column="loginName"/>
+        <result property="loginPassword" column="loginPassword"/>
+        <result property="realName" column="realName"/>
+        <result property="power" column="power"/>
+        <result property="level" column="level"/>
+        <result property="createTime" column="createTime"/>
+        <result property="email" column="email"/>
+        <result property="area" column="area"/>
+        <result property="status" column="status"/>
+        <result property="extension" column="extension"/>
+        <result property="areaCode" column="areaCode"/>
+    </resultMap>
+
+    <select id="findOldPeopleIDcardNumber" resultType="java.lang.String">
+        select idNumber from oldpeopleinfo where status!=0
+    </select>
+    <select id="countOldByNoWuzhou" resultType="java.lang.Integer">
+        select count(*) from oldpeopleinfo where cid not like '077401%' and cid not like '077402%' and cid not like '077403%' and status!=0
+    </select>
+    <select id="countOldByWuzhou" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from oldpeopleinfo where cid like #{location} and status!=0
+    </select>
+    <select id="countDisability" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(*) from oldpeopleinfo where clientType=#{type} and status!=0
+    </select>
+    <select id="countAllDisability" resultMap="OldPeopleMap">
+        select *
+        from oldpeopleinfo
+        where userbody like '%残疾%'
+        or userbody like '%肢体%'
+        or userbody like '%精神%'
+        or userbody like '%智力%'
+        or userbody like '%听力%'
+        or userbody like '%言语%'
+        or userbody like '%视力%'
+    </select>
+    <select id="countGovernmentService" resultType="java.lang.Integer">
+        select count(*)from oldpeopleinfo where serveType=6
+        union all
+        select count(*)from oldpeopleinfo where serveType=7
+        union all
+        select count(*)from oldpeopleinfo where serveType=8
+        union all
+        select count(*)from oldpeopleinfo where serveType=9
+        union all
+        select count(*)from oldpeopleinfo where serveType=10
+        union all
+        select count(*)from oldpeopleinfo where serveType=11
+        union all
+        select count(*)from oldpeopleinfo where serveType=12
+        union all
+        select count(*)from oldpeopleinfo where serveType=13
+        union all
+        select count(*)from oldpeopleinfo where serveType=14
+        union all
+        select count(*)from oldpeopleinfo where serveType=15
+    </select>
+    <select id="Disease" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*)
+        from oldpeopleinfo where userbody like #{userbody1}
+        <if test="userbody2!=null">
+          union all select count(*)from oldpeopleinfo where userbody like #{userbody2}
+        </if>
+        <if test="userbody3!=null">
+            union all select count(*)from oldpeopleinfo where userbody like #{userbody3}
+        </if>
+    </select>
+    <select id="Disability" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*)from oldpeopleinfo where userbody like #{Disability1}
+        union all
+        select count(*)from oldpeopleinfo where userbody like #{Disability2}
+        union all
+        select count(*)from oldpeopleinfo where userbody like #{Disability3}
+        union all
+        select count(*)from oldpeopleinfo where userbody like #{Disability4}
+    </select>
+    <select id="findOldPeopleByEquipmentId" parameterType="java.lang.String" resultType="OldPeopleLocationInfo">
+        select * from oldpeopleinfo where equipmentId like #{equipmentId}
+    </select>
+    <select id="login" resultMap="UserMapper">
+        select * from admineregister where status=1 and loginName=#{loginName} and loginPassword=#{loginPassword}
+    </select>
+</mapper>

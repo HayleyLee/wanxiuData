@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.wanxiuData.dao.ServiceMapper">
+    <resultMap id="IDMap" type="com.wanxiuData.entity.IDentity" >
+        <result property="OrderId" column="OrderId"/>
+        <result property="MerchantId" column="MerchantId"/>
+    </resultMap>
+    <resultMap id="NursingLocation" type="com.wanxiuData.entity.NursingLocation">
+        <result property="ulFlowId" column="ulFlowId"/>
+        <result property="userId" column="userId"/>
+        <result property="userName" column="userName"/>
+        <result property="updateState" column="updateState"/>
+        <result property="longitude" column="longitude"/>
+        <result property="latitude" column="latitude"/>
+        <result property="province" column="province"/>
+        <result property="city" column="city"/>
+        <result property="county" column="county"/>
+        <result property="town" column="town"/>
+        <result property="village" column="village"/>
+        <result property="address" column="address"/>
+        <result property="gainTime" column="gainTime"/>
+        <result property="status" column="status"/>
+    </resultMap>
+    <resultMap id="Order" type="com.wanxiuData.entity.Order">
+        <result property="orderId" column="orderId"/>
+        <result property="nursingId" column="nursingId"/>
+        <result property="userId" column="userId"/>
+        <result property="commodityId" column="commodityId"/>
+        <result property="realName" column="realName"/>
+        <result property="shippingAddress" column="shippingAddress"/>
+        <result property="orderStatus" column="orderStatus"/>
+        <result property="merchantName" column="merchantName"/>
+        <result property="consignee" column="consignee"/>
+        <result property="createdate" column="createdate"/>
+    </resultMap>
+    <resultMap id="OrderImg" type="com.wanxiuData.entity.OrderImg">
+        <result property="imagesId" column="imagesId"/>
+        <result property="orderId" column="orderId"/>
+        <result property="imageName" column="imageName"/>
+        <result property="imageNewName" column="imageNewName"/>
+        <result property="imagesPath" column="imagesPath"/>
+        <result property="pictureCategory" column="pictureCategory"/>
+        <result property="published" column="published"/>
+    </resultMap>
+    <!--根据服务类型统计订单数-->
+    <select id="ServiceTypeCount" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        select
+         count(*)
+         from
+         userordergenerate
+         inner join
+         merchantcommodity
+         where
+         userordergenerate.commodityId=merchantcommodity.commodityId
+         and
+         merchantcommodity.typeId=#{count}
+         and
+         userordergenerate.createdate=#{time}
+    </select>
+    <!--查询所有有效订单-->
+    <select id="CountTOPService" resultMap="IDMap">
+        select a.orderId,c.merchantId
+        from userordergenerate a,merchantcommodity b,merchantsinfo c
+        where
+        a.commodityId=b.commodityId
+        and
+        b.merchantId=c.merchantId
+        order by c.merchantId
+        asc
+    </select>
+    <!--根据商家id查询商家名-->
+    <select id="findMerchantByMerchantId" resultType="java.lang.String" parameterType="java.lang.Integer">
+        SELECT
+        merchantName
+        FROM
+        merchantsinfo
+        WHERE
+        merchantsinfo.merchantId=#{merID}
+    </select>
+    <!--查询今天订单-->
+    <select id="findToDayOrder" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(*) from userordergenerate where orderTime like #{time}
+    </select>
+    <!--按地区统计订单数-->
+    <select id="countServiceByLocation" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(distinct uo.orderId) from
+        (select uu.userId from
+	      (select distinct phone from oldpeopleinfo where instr(oldpeopleinfo.cid,#{location})>0 and status=1) oo
+	      left join
+	      (select distinct mobile,userId from userregister) uu
+	      on oo.phone = uu.mobile where uu.userId!="") xx
+        left join userordergenerate uo
+        on uo.userId = xx.userId
+        where uo.orderId!=""
+    </select>
+    <!--根据服务类型统计订单数-->
+    <select id="CountServiceType" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        select
+         count(*)
+         from
+         userordergenerate
+         inner join
+         merchantcommodity
+         where
+         userordergenerate.commodityId=merchantcommodity.commodityId
+         and
+         merchantcommodity.typeId=#{type}
+    </select>
+    <select id="findAllNursingLocation" resultMap="NursingLocation">
+        SELECT * from (SELECT * from jobuserlocationflow ORDER BY gainTime desc) tt GROUP BY tt.userId;
+    </select>
+    <!--根据用户ID查找此护工的最新8条订单-->
+    <select id="findOrderByNursingUserID" parameterType="java.lang.Integer" resultMap="Order">
+        select * from userordergenerate
+        inner join
+        nursingworkersinfo
+        on
+        userordergenerate.nursingId=nursingworkersinfo.nursingId
+        where
+        nursingworkersinfo.userId=#{userId}
+        and
+        userordergenerate.orderStatus!=0
+        and
+        userordergenerate.orderStatus!=3
+        and
+        userordergenerate.orderStatus!=4
+        and
+        userordergenerate.orderStatus!=5
+        order by
+        userordergenerate.createdate desc
+        limit 8
+    </select>
+    <!--根据护工的用户id查找此人是否有订单-->
+    <select id="checkUserOrder" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(*) from userordergenerate
+        inner join
+        nursingworkersinfo
+        on
+        userordergenerate.nursingId=nursingworkersinfo.nursingId
+        where
+        nursingworkersinfo.userId=#{userId}
+        and
+        userordergenerate.orderStatus!=0
+        and
+        userordergenerate.orderStatus!=3
+        and
+        userordergenerate.orderStatus!=4
+        and
+        userordergenerate.orderStatus!=5
+    </select>
+    <!--根据护工的用户ID查找头像-->
+    <select id="findNursingHead" parameterType="java.lang.Integer" resultType="java.lang.String">
+        select portrait from userregister where userId=#{userId}
+    </select>
+    <!--根据订单ID获取评论图片-->
+    <select id="findImgByOrder" parameterType="java.lang.Integer" resultMap="OrderImg">
+        select * from evaluateimage where orderId=#{orderId}
+    </select>
+    <!--根据用户ID查找此护工的所有订单-->
+    <select id="findAllOrderByNursingUserID" parameterType="java.lang.Integer" resultMap="Order">
+        select * from userordergenerate
+        inner join
+        nursingworkersinfo
+        on
+        userordergenerate.nursingId=nursingworkersinfo.nursingId
+        where
+        nursingworkersinfo.userId=#{userId}
+        order by
+        userordergenerate.createdate desc
+    </select>
+</mapper>

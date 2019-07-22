@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanxiuData.dao.LocationMapper">
+    <resultMap id="OldLocation" type="com.wanxiuData.entity.OldLocation">
+        <result property="id" column="id"/>
+        <result property="cusname" column="cusname"/>
+        <result property="imei" column="imei"/>
+        <result property="imsi" column="imsi"/>
+        <result property="normal" column="normal"/>
+        <result property="loginno" column="loginno"/>
+        <result property="latitude" column="latitude"/>
+        <result property="longitude" column="longitude"/>
+        <result property="type" column="type"/>
+        <result property="model" column="model"/>
+        <result property="createtime" column="createtime"/>
+        <result property="address" column="address"/>
+    </resultMap>
+    <select id="findAllOldLocation" resultMap="OldLocation">
+        SELECT * from (SELECT * from fdxlocation ORDER BY createtime desc) tt GROUP BY tt.imei;
+    </select>
+</mapper>

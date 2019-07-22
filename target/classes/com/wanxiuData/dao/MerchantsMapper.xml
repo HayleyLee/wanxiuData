@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wanxiuData.dao.MerchantsMapper">
+    <resultMap id="MerchantsLocation" type="com.wanxiuData.entity.MerchantsLocation">
+        <result property="merchantId" column="merchantId"/>
+        <result property="longitude" column="longitude"/>
+        <result property="latitude" column="latitude"/>
+        <result property="typeId" column="typeId"/>
+        <result property="merchantType" column="merchantType"/>
+        <result property="order" column="order"/>
+    </resultMap>
+    <resultMap id="Merchants" type="com.wanxiuData.entity.Merchants">
+        <result property="merchantName" column="merchantName"/>
+        <result property="responsiblePerson" column="responsiblePerson"/>
+        <result property="phone" column="phone"/>
+        <result property="businessLicenseImage" column="businessLicenseImage"/>
+        <result property="merchantsImages" column="merchantsImages"/>
+        <result property="address" column="address"/>
+        <result property="introductionStores" column="introductionStores"/>
+    </resultMap>
+    <resultMap id="Order" type="com.wanxiuData.entity.Order">
+        <result property="orderId" column="orderId"/>
+        <result property="nursingId" column="nursingId"/>
+        <result property="userId" column="userId"/>
+        <result property="commodityId" column="commodityId"/>
+        <result property="realName" column="realName"/>
+        <result property="shippingAddress" column="shippingAddress"/>
+        <result property="orderStatus" column="orderStatus"/>
+        <result property="merchantName" column="merchantName"/>
+        <result property="consignee" column="consignee"/>
+        <result property="createdate" column="createdate"/>
+    </resultMap>
+    <select id="MerchantsCount" resultType="java.lang.Integer">
+        select count(*) from merchantsinfo
+    </select>
+    <select id="NursingCount" resultType="java.lang.Integer">
+        select count(*) from nursingworkersinfo where status=1
+    </select>
+    <select id="DoctorCount" resultType="java.lang.Integer">
+        select count(*) from doctorswokersinfo
+    </select>
+    <select id="VolunteerCount" resultType="java.lang.Integer">
+        select count(*) from userregister where roleId=7 or roleId=5
+    </select>
+    <select id="SocialCount" resultType="java.lang.Integer">
+        select count(*) from userregister where roleId=6
+    </select>
+    <select id="InstituteCount" resultType="java.lang.Integer">
+        select count(*) from merchantsinfo where typeId=8 and merchantType!=0
+    </select>
+    <!--根据商家ID查找商家订单数-->
+    <select id="CountOrderByMerchantsID" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(a.orderId)
+        from userordergenerate a,merchantcommodity b,merchantsinfo c
+        where
+        a.commodityId=b.commodityId
+        and
+        b.merchantId=c.merchantId
+		and
+		c.merchantId=#{merchantsID}
+    </select>
+    <select id="findMerchantLocationInfo" resultMap="MerchantsLocation">
+        select * from merchantsinfo where status=2
+    </select>
+    <select id="findMerchantByMerchantID" parameterType="java.lang.Integer" resultMap="Merchants">
+        select * from merchantsinfo where merchantId=#{merchantID}
+    </select>
+    <select id="findMerchantByTypeId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select count(*) from merchantsinfo where typeId=#{typeId}
+    </select>
+    <select id="NewOrder" resultMap="Order">
+        select * from userordergenerate order by orderId desc limit 0,20
+    </select>
+</mapper>
