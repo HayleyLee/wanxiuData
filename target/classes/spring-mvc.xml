@@ -41,7 +41,7 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
         <property name="defaultEncoding" value="utf-8" />
         <property name="resolveLazily" value="true"/><!-- 延迟解析（把上传异常交给Controller处理） -->
     </bean>
-    <bean id="flushRedis" class="com.wanxiuData.uitl.Redis" init-method="TimerByFlushAllCache"/>
+    <bean id="flushRedis" class="com.wanxiuData.uitl.Redis" init-method="FlushAllCache"/>
     <bean id="countService" class="com.wanxiuData.uitl.Redis" init-method="TimerByCountService"/>
     <bean id="oldLocation" class="com.wanxiuData.uitl.Redis" init-method="TimerByOldLocation"/>
     <bean id="countOrderByGovernment" class="com.wanxiuData.uitl.Redis" init-method="CountAllOrderByGovernment"/>

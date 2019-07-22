@@ -26,6 +26,9 @@ public class Redis {
     @Autowired
     private GovernmentMapper governmentMapper;
 
+    public void FlushAllCache(){
+        fulshRedis();
+    }
     public void TimerByCountService(){
         Calendar calendar = Calendar.getInstance();
         calendar.get(Calendar.HOUR_OF_DAY);
@@ -58,22 +61,6 @@ public class Redis {
             }
         }, time, 1000 * 60 * 30);// 这里设定函数定时执行
     }
-    public void TimerByFlushAllCache(){
-        Calendar calendar = Calendar.getInstance();
-        calendar.get(Calendar.HOUR_OF_DAY);
-        calendar.get(Calendar.MINUTE);
-        calendar.get(Calendar.SECOND);
-        Date time = calendar.getTime();         // 获取当前时分秒
-        Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            public void run() {
-                System.out.println("开始执行清空redis缓存任务...");
-                fulshRedis();
-                System.out.println("执行清空redis缓存任务完成...");
-            }
-        }, time, 1000 * 60 * 28);// 这里设定函数定时执行
-
-    }
     public void CountAllOrderByGovernment(){
         Calendar calendar = Calendar.getInstance();
         calendar.get(Calendar.HOUR_OF_DAY);
@@ -91,7 +78,7 @@ public class Redis {
         }, time, 1000 * 60 * 60 * 6);// 这里设定函数定时执行
     }
     public void Thread(){
-        System.out.print("开始执行多线程任务...");
+        System.out.println("开始执行多线程任务...任务未完成前请勿关闭tomcat服务！");
         new Thread01().start();
         new Thread02().start();
         new Thread03().start();
@@ -127,6 +114,10 @@ public class Redis {
         Integer wanxiu = serviceMapper.countServiceByLocation("77401");
         Integer changzhou = serviceMapper.countServiceByLocation("77402");
         Integer longxu = serviceMapper.countServiceByLocation("77403");
+        //清空缓存
+        jedis.del("locationWanxiu");
+        jedis.del("locationChangzhou");
+        jedis.del("locationLongxu");
         //写入redis缓存
         jedis.set("locationWanxiu",wanxiu.toString());
         jedis.set("locationChangzhou",changzhou.toString());
@@ -139,6 +130,9 @@ public class Redis {
         Jedis jedis = new Jedis("localhost");
         ArrayList<OldLocation> list = locationMapper.findAllOldLocation();
         ArrayList<OldPeopleLocationInfo> oldlist = oldPeopleService.findOldPeopleByEquipmentId(list);
+        //清空缓存
+        jedis.del("LocationList");
+        jedis.del("OldInfoList");
         //写入redis缓存
         for(OldLocation o:list){
             jedis.lpush("LocationList".getBytes(),SerializeUtil.serialize(o));
@@ -153,6 +147,8 @@ public class Redis {
         //去数据库
         Jedis jedis = new Jedis("localhost");
         Integer orderCount = governmentMapper.AllOrderCount();
+        //清空缓存
+        jedis.del("AllOrderCountByGovernment");
         //写入redis缓存
         jedis.set("AllOrderCountByGovernment",orderCount.toString());
         //回收资源
@@ -160,6 +156,8 @@ public class Redis {
     }
     public void writeRedis(String key,ArrayList<GovernmentOrder> list) {
         Jedis jedis = new Jedis("localhost");
+        //清空缓存
+        jedis.del(key);
         for(GovernmentOrder g:list){
             jedis.lpush(key.getBytes(),SerializeUtil.serialize(g));
         }
@@ -183,7 +181,6 @@ public class Redis {
             String time = "'"+strTime+"'";
             try {
                 Class.forName("com.mysql.jdbc.Driver");
-                System.out.println("连接数据库...");
                 conn = DriverManager.getConnection(DB_URL, USER, PASS);
                 stmt1 = conn.createStatement();
                 stmt2 = conn.createStatement();
