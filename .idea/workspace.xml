@@ -67,10 +67,10 @@
           <entry key="java" value="1148" />
           <entry key="jpg" value="6" />
           <entry key="js" value="135" />
-          <entry key="jsp" value="291" />
+          <entry key="jsp" value="292" />
           <entry key="png" value="43" />
-          <entry key="properties" value="16" />
-          <entry key="xml" value="261" />
+          <entry key="properties" value="19" />
+          <entry key="xml" value="264" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
@@ -80,10 +80,10 @@
           <entry key="HTML" value="2" />
           <entry key="Image" value="49" />
           <entry key="JAVA" value="1148" />
-          <entry key="JSP" value="291" />
+          <entry key="JSP" value="292" />
           <entry key="JavaScript" value="135" />
-          <entry key="Properties" value="16" />
-          <entry key="XML" value="261" />
+          <entry key="Properties" value="19" />
+          <entry key="XML" value="264" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -115,7 +115,17 @@
     <favorites_list name="wanxiuData" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/database.properties">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="200">
+              <caret line="8" column="32" lean-forward="true" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -177,7 +187,6 @@
         <option value="$PROJECT_DIR$/src/main/java/com/wanxiuData/service/Impl/BigDataServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/extenmonitor2.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/wanxiuCalling.jsp" />
-        <option value="$PROJECT_DIR$/src/main/resources/database.properties" />
         <option value="$PROJECT_DIR$/src/main/java/com/wanxiuData/service/Impl/PBXServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/static/css/styles/style.css" />
         <option value="$PROJECT_DIR$/src/main/webapp/404.jsp" />
@@ -218,6 +227,7 @@
         <option value="$PROJECT_DIR$/src/main/java/com/wanxiuData/service/Impl/GovernmentServiceImpl.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/wanxiuData/dao/GovernmentMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/webapp/government.jsp" />
+        <option value="$PROJECT_DIR$/src/main/resources/database.properties" />
       </list>
     </option>
   </component>
@@ -291,6 +301,20 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="wanxiuData" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wanxiuData" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wanxiuData" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="wanxiuData" type="b2602c69:ProjectViewProjectNode" />
+              <item name="wanxiuData" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="webapp" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -547,12 +571,12 @@
       <workItem from="1566805343293" duration="588000" />
       <workItem from="1566875727746" duration="6249000" />
       <workItem from="1566975498045" duration="3512000" />
-      <workItem from="1567067504256" duration="633000" />
+      <workItem from="1567067504256" duration="1949000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="510502000" />
+    <option name="totallyTimeSpent" value="511818000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -565,6 +589,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49460918" visible="true" weight="0.21722364" />
       <window_info id="Structure" order="1" sideWeight="0.5040431" side_tool="true" weight="0.20565553" />
@@ -643,20 +668,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/nursingInfo.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="30" column="37" lean-forward="true" selection-start-line="30" selection-start-column="37" selection-end-line="30" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/wanxiuData/controller/ImgController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="5" column="21" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wanxiuData/service/ImgService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="50">
@@ -774,13 +785,6 @@
     <entry file="file://$PROJECT_DIR$/src/main/webapp/static/indexStatic/js/scripts/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1050" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/spring-mvc.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="48" column="78" lean-forward="true" selection-start-line="48" selection-start-column="78" selection-end-line="48" selection-end-column="78" />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/ShowPhoto.jsp">
@@ -938,13 +942,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/government.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="18" column="76" selection-start-line="18" selection-start-column="76" selection-end-line="18" selection-end-column="76" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/wanxiuData/dao/CompanyNewsMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -963,6 +960,34 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="200">
           <caret line="8" column="7" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/spring-mvc.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="900">
+          <caret line="48" column="78" lean-forward="true" selection-start-line="48" selection-start-column="78" selection-end-line="48" selection-end-column="78" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/government.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="18" column="76" selection-start-line="18" selection-start-column="76" selection-end-line="18" selection-end-column="76" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/appliactionContext.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="38" column="11" lean-forward="true" selection-start-line="38" selection-start-column="11" selection-end-line="38" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/database.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="8" column="32" lean-forward="true" selection-start-line="8" selection-start-column="32" selection-end-line="8" selection-end-column="32" />
         </state>
       </provider>
     </entry>
