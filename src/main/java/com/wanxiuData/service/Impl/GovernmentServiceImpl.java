@@ -9,7 +9,6 @@ import com.wanxiuData.entity.GovernmentOrder;
 import com.wanxiuData.entity.GovernmentUser;
 import com.wanxiuData.entity.ServerType;
 import com.wanxiuData.service.GovernmentService;
-import com.wanxiuData.uitl.SerializeUtil;
 import com.wanxiuData.uitl.SomeEverthingTasks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,13 +28,13 @@ public class GovernmentServiceImpl implements GovernmentService {
     private String changzhouAreaCode="450425%";
     private String longxuAreaCode="450424%";
     private Integer normal=31;//正常服务
-    private Integer wanxiuSubstitutes=28;//万秀后补
-    private Integer changzhouSubstitutes0=24;//长洲后补
-    private Integer changzhouSubstitutes1=25;//长洲后补
-    private Integer longxuSubstitutes=52;//龙圩后补
-    private Integer wanxiuDead=49;//万秀死亡
-    private Integer changzhouDead=50;//长洲死亡
-    private Integer longxuDead=51;//龙圩死亡
+//    private Integer wanxiuSubstitutes=28;//万秀后补
+//    private Integer changzhouSubstitutes0=24;//长洲后补
+//    private Integer changzhouSubstitutes1=25;//长洲后补
+//    private Integer longxuSubstitutes=52;//龙圩后补
+//    private Integer wanxiuDead=49;//万秀死亡
+    private Integer Dead=50;//死亡
+//    private Integer longxuDead=51;//龙圩死亡
 
     @Override
     public Integer AllPeopleCount() {
@@ -116,20 +115,20 @@ public class GovernmentServiceImpl implements GovernmentService {
         ArrayList<GovernmentUser> list = new ArrayList<GovernmentUser>();
         //正常
         Integer wanxiu = governmentMapper.CountNormalGovernmentUser(normal, wanxiuAreaCode);
-        Integer changzhou = governmentMapper.CountNormalGovernmentChangzhouUser(changzhouAreaCode);
+        Integer changzhou = governmentMapper.CountNormalGovernmentUser(normal,changzhouAreaCode);
         Integer longxu = governmentMapper.CountNormalGovernmentUser(normal, longxuAreaCode);
         //后补
-        Integer wanxiuSubstitutesData = governmentMapper.CountNoNormalGovernmentUser(wanxiuSubstitutes);
-        Integer changzhouSubstitutesData = governmentMapper.CountNoNormalGovernmentUser(changzhouSubstitutes0)+governmentMapper.CountNoNormalGovernmentUser(changzhouSubstitutes1);
-        Integer longxuSubstitutesData = governmentMapper.CountNoNormalGovernmentUser(longxuSubstitutes);
+//        Integer wanxiuSubstitutesData = governmentMapper.CountNoNormalGovernmentUser(wanxiuSubstitutes);
+//        Integer changzhouSubstitutesData = governmentMapper.CountNoNormalGovernmentUser(changzhouSubstitutes0)+governmentMapper.CountNoNormalGovernmentUser(changzhouSubstitutes1);
+//        Integer longxuSubstitutesData = governmentMapper.CountNoNormalGovernmentUser(longxuSubstitutes);
         //死亡
-        Integer wanxiuDeadData = governmentMapper.CountNoNormalGovernmentUser(wanxiuDead);
-        Integer changzhouDeadData = governmentMapper.CountNoNormalGovernmentUser(changzhouDead);
-        Integer longxuDeadData = governmentMapper.CountNoNormalGovernmentUser(longxuDead);
+        Integer wanxiuDeadData = governmentMapper.CountNormalGovernmentUser(Dead,wanxiuAreaCode);
+        Integer changzhouDeadData = governmentMapper.CountNormalGovernmentUser(Dead,changzhouAreaCode);
+        Integer longxuDeadData = governmentMapper.CountNormalGovernmentUser(Dead,longxuAreaCode);
 
-        list.add(new GovernmentUser(wanxiu,wanxiuSubstitutesData,wanxiuDeadData));
-        list.add(new GovernmentUser(changzhou,changzhouSubstitutesData,changzhouDeadData));
-        list.add(new GovernmentUser(longxu,longxuSubstitutesData,longxuDeadData));
+        list.add(new GovernmentUser(wanxiu,wanxiuDeadData));
+        list.add(new GovernmentUser(changzhou,changzhouDeadData));
+        list.add(new GovernmentUser(longxu,longxuDeadData));
         return list;
     }
 
@@ -137,17 +136,17 @@ public class GovernmentServiceImpl implements GovernmentService {
     public List<GovernmentOrder> CountGovernmentOrderByLocationAndMerchantName() {
         ArrayList<GovernmentOrder> list = new ArrayList<GovernmentOrder>();
         //万秀
-        Integer wanxiuLife = governmentMapper.CountGovernmentOrderByLocationAndMerchantName(wanxiuAreaCode, "%生活%");
-        Integer wanxiuRecovery = governmentMapper.CountGovernmentOrderByLocationAndMerchantName(wanxiuAreaCode, "%康复%");
-        Integer wanxiuOther = governmentMapper.CountGovernmentOrderByLocation(wanxiuAreaCode);
+        Integer wanxiuLife = governmentMapper.CountGovernmentOrderByWanxiu(wanxiuAreaCode,"%生活%");
+        Integer wanxiuRecovery = governmentMapper.CountGovernmentOrderByWanxiu(wanxiuAreaCode,"%康复%");
+        Integer wanxiuOther = governmentMapper.CountGovernmentOrderByWanxiuNoMerchant(wanxiuAreaCode);
         //长洲
-        Integer changzhouLife = governmentMapper.CountGovernmentOrderByLocationAndMerchantName(changzhouAreaCode, "%生活%");
-        Integer changzhouRecovery = governmentMapper.CountGovernmentOrderByLocationAndMerchantName(changzhouAreaCode, "%康复%");
-        Integer changzhouOther = governmentMapper.CountGovernmentOrderByLocation(changzhouAreaCode);
+        Integer changzhouLife = governmentMapper.CountGovernmentOrderByChangzhou(changzhouAreaCode,"%生活%");
+        Integer changzhouRecovery = governmentMapper.CountGovernmentOrderByChangzhou(changzhouAreaCode,"%康复%");
+        Integer changzhouOther = governmentMapper.CountGovernmentOrderByChangzhouNoMerchant(changzhouAreaCode);
         //龙圩
-        Integer longxuLife = governmentMapper.CountGovernmentOrderByLocationAndMerchantName(longxuAreaCode, "%生活%");
-        Integer longxuRecovery = governmentMapper.CountGovernmentOrderByLocationAndMerchantName(longxuAreaCode, "%康复%");
-        Integer longxuOther = governmentMapper.CountGovernmentOrderByLocation(longxuAreaCode);
+        Integer longxuLife = governmentMapper.CountGovernmentOrderByLongxu(longxuAreaCode,"%生活%");
+        Integer longxuRecovery = governmentMapper.CountGovernmentOrderByLongxu(longxuAreaCode,"%康复%");
+        Integer longxuOther = governmentMapper.CountGovernmentOrderByLongxuNoMerchant(longxuAreaCode);
         list.add(new GovernmentOrder(wanxiuRecovery,wanxiuLife,wanxiuOther));
         list.add(new GovernmentOrder(changzhouRecovery,changzhouLife,changzhouOther));
         list.add(new GovernmentOrder(longxuRecovery,longxuLife,longxuOther));

@@ -6,7 +6,7 @@
         select count(*) from liancdrall where caller_id_name not like 'Extension%' and billsec>0
     </select>
     <select id="findOutCall" resultType="java.lang.Integer">
-        select COUNT(*) as sum FROM lianfsdb.liancdrall a1 WHERE true and (a1.liancalltype='outcall')
+        select COUNT(*) as sum FROM lianfsdb.liancdrall a1 where true and (a1.liancalltype='outcall')
     </select>
     <select id="findInCall" resultType="java.lang.Integer">
         select COUNT(*) as sum from lianfsdb.liancdrall a1 where true and (a1.liancalltype='incall') and (a1.bleg_uuid!='')

@@ -2,14 +2,14 @@ package com.wanxiuData.service.Impl;
 
 import com.wanxiuData.algorithm.TimeFormat;
 import com.wanxiuData.dao.PbxMapper;
+import com.wanxiuData.service.PBXService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
-import java.util.Calendar;
 
 @Service
-public class PBXServiceImpl implements com.wanxiuData.service.PBXService {
+public class PBXServiceImpl implements PBXService {
     @Autowired
     private PbxMapper pbxMapper;
     @Override
@@ -65,10 +65,19 @@ public class PBXServiceImpl implements com.wanxiuData.service.PBXService {
         TimeFormat timeFormat = new TimeFormat();
         String time = timeFormat.getToDayStrTime();//返回格式：20xx-xx-xx
         String yesterDay = timeFormat.getYesterdayStrTime();
-        Integer toDayData = pbxMapper.findToDay(time + "%");
-        Integer yesterDayData = pbxMapper.findToDay(yesterDay + "%");
+        Double toDayData = (double)pbxMapper.findToDay(time + "%");
+        Double yesterDayData = (double)pbxMapper.findToDay(yesterDay + "%");
         DecimalFormat df=new DecimalFormat("0.00");//设置保留位数
-        return df.format((float)toDayData/yesterDayData*100);
+        if(toDayData>0 && yesterDayData>0){
+            return df.format(toDayData/yesterDayData*100);
+        }
+        if(toDayData==0){
+            return "0";
+        }
+        if(yesterDayData==0){
+            return df.format(toDayData*100);
+        }
+        return null;
     }
 
     @Override

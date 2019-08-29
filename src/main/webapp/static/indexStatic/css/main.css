@@ -1,0 +1,53 @@
+@CHARSET "UTF-8";
+
+body {
+	margin: 0px;
+	padding: 0px;
+	font-size: 12px;
+	line-height: 20px;
+	/* color: #333;   */
+	font-family: Microsoft YaHei;
+	background-color: #EEEEEE;
+}
+
+.maindiv {
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0px;
+	width: 1000px;
+	clear: both;
+}
+/* 设置边框为1像素，颜色为百分之20灰色*/
+.divborder {
+	border: 1px solid;
+	border-color: rgb(204, 204, 204);
+	background-color: #fff;
+}
+/* 设置背景色为淡灰色，边框为1像素，颜色为百分之20灰色 */
+.divbackground {
+	border: 1px solid;
+	border-color: rgb(204, 204, 204);
+	background-color: rgb(243, 248, 255);
+}
+
+a {
+	text-decoration: none;
+}
+
+/* 是超级链接的初始状态 */
+a:LINK { /* 	color: rgb(255,255,225); */
+	
+}
+/* 是把鼠标放上去时悬停的状况 */
+a:HOVER { /*	color: yellow;*/
+	
+}
+
+/* 是鼠标点击时 */
+a:ACTIVE { /* color: red; */
+	
+}
+/* 是访问过后的情况 */
+a:VISITED { /* color: rgb(255,255,225); */
+	
+}

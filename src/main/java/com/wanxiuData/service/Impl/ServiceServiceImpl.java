@@ -56,20 +56,6 @@ public class ServiceServiceImpl implements ServiceService {
         Integer CommunityMedicalCount = serviceMapper.ServiceTypeCount(CommunityMedical,intTime);
         Integer CommunityServiceCount = serviceMapper.ServiceTypeCount(CommunityService,intTime);
         Integer MedicalServiceTeamCount = serviceMapper.ServiceTypeCount(MedicalServiceTeam,intTime);
-//        Integer []array = {LifeCount,HealthyCount,OutFoodCount,CommunityMedicalCount,CommunityServiceCount,MedicalServiceTeamCount};
-        //冒泡排序
-//        for(int j=array.length-1;j>0;j--){
-//            for(int i=0;i<j;i++){
-//                if(array[i]>array[i+1]){
-//                    int temp = array[i];
-//                    array[i] = array[i+1];
-//                    array[i+1] = temp;
-//                }
-//            }
-//        }
-//        for(int i=0;i<array.length;i++){
-//            System.out.print("排序："+array[i]);
-//        }
         String temp = "[{value:"+LifeCount+", name:'生活照料'},{value:"+HealthyCount+", name:'康复护理'},{value:"+OutFoodCount+", name:'快餐配送'},{value:"+CommunityMedicalCount+", name:'社区医疗'},{value:"+CommunityServiceCount+", name:'社区服务'},{value:"+MedicalServiceTeamCount+", name:'医疗服务队'}]";
         JSONArray jsonArray = JSONArray.fromObject(temp);
         if(jsonArray.size()>0){
@@ -160,7 +146,7 @@ public class ServiceServiceImpl implements ServiceService {
         for(int i=0;i<allNursingLocation.size();i++){
             orderList.add(serviceMapper.checkUserOrder(allNursingLocation.get(i).getUserId()));
         }
-        if(CreateFileUtil.createJsonFile(Str, "E:\\wanxiuData\\webapps\\ROOT\\static", "nursingLocations")){
+        if(CreateFileUtil.createJsonFile(Str, "/usr/local/apache-tomcat-7.0.77/webapps/wzData/static", "nursingLocations")){
             return orderList;
         }else {
             return null;

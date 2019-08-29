@@ -5,7 +5,9 @@
   Time: 9:59
   To change this template use File | Settings | File Templates.
 --%>
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%>
+<%@ page isELIgnored="false" %>
+<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="robots" content="noindex,nofollow">
@@ -29,7 +31,7 @@
         </tr>
         <tr><td>原因一：您敲错了网址</td></tr>
         <tr><td>原因二：您的账号并非管理员权限</td></tr>
-        <tr><td>原因三：登陆的账号密码有误，请<a href="index.jsp" >重新尝试</a></td></tr>
+        <tr><td>原因三：登陆的账号密码有误，请<a href="login.jsp" >重新尝试</a></td></tr>
     </table>
 </div>
 </body>

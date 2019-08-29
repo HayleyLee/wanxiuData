@@ -212,7 +212,7 @@ $(document).ready(function () {
                         var finalTime = year+"-"+month+"-"+day;
                         str+="<tr><td>"+data[i].realName+"</td><td>"+data[i].merchantName+"</td><td>"+finalTime+"</td></tr>"
                     }
-                    $("#NewOrder").append(str);
+                    $("#NewOrder").html(str);
                 }
             },
             error:function () {

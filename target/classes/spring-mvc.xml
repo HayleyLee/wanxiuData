@@ -41,25 +41,10 @@ http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
         <property name="defaultEncoding" value="utf-8" />
         <property name="resolveLazily" value="true"/><!-- 延迟解析（把上传异常交给Controller处理） -->
     </bean>
+    <!--spring启动后执行以下方法-->
     <bean id="flushRedis" class="com.wanxiuData.uitl.Redis" init-method="FlushAllCache"/>
     <bean id="countService" class="com.wanxiuData.uitl.Redis" init-method="TimerByCountService"/>
     <bean id="oldLocation" class="com.wanxiuData.uitl.Redis" init-method="TimerByOldLocation"/>
     <bean id="countOrderByGovernment" class="com.wanxiuData.uitl.Redis" init-method="CountAllOrderByGovernment"/>
     <bean id="thread" class="com.wanxiuData.uitl.Redis" init-method="Thread"/>
-    <!-- 登录拦截器配置-->
-    <mvc:interceptors>
-        <mvc:interceptor>
-            <mvc:mapping path="/indexData.jsp"/>
-            <mvc:mapping path="/MerchantInfo.jsp"/>
-            <mvc:mapping path="/nursingInfo.jsp"/>
-            <mvc:mapping path="/wanxiuCalling.jsp"/>
-            <mvc:mapping path="/wanxiuMerchants.jsp"/>
-            <mvc:mapping path="/wanxiuServer.jsp"/>
-            <mvc:mapping path="/wanxiuTrend.jsp"/>
-            <!-- 排除拦截的url -->
-            <mvc:exclude-mapping path="/index.jsp"/>
-            <mvc:exclude-mapping path="/404.jsp"/>
-            <bean class="com.wanxiuData.safety.LoginStatusHandler" />
-        </mvc:interceptor>
-    </mvc:interceptors>
 </beans>

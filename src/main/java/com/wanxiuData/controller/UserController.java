@@ -89,7 +89,8 @@ public class UserController {
         if(user!=null){
             request.getSession().setAttribute("user",user);
             return new ModelAndView("redirect:/indexData.jsp");
+        }else {
+            return new ModelAndView("redirect:/404.jsp");
         }
-        return new ModelAndView("redirect:/404.jsp");
     }
 }

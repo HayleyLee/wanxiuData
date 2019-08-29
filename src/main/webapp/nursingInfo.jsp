@@ -6,7 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<%@ page isELIgnored="false" %>
+<!DOCTYPE html>
 <head>
     <title>Title</title>
     <script src="static/js/scripts/Plugin/jquery-3.3.1.min.js"></script>
@@ -22,6 +23,15 @@
 </div>
 <div style="clear: both"></div>
 <div id="OrderInfo" style="margin-top: 3%"></div><span id="userId" style="display: none;">${param.userId}</span>
+<span id="username" style="display: none">${user.loginName}</span>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var name=$("#username").text();
+        if(name==null||name==""){
+            location.href="/404.jsp";
+        }
+    })
+</script>
 </body>
 <script>
     function showImg(){
@@ -46,7 +56,7 @@
         $.ajax({
             type:"post",
             data:{"userId":userid},
-            url:"/Service/findNursingHead",
+            url:"/wzData/Service/findNursingHead",
             success:function (data) {
                 if(data!=null){
                     var img = headImgPath+data;
@@ -61,7 +71,7 @@
         $.ajax({
             type:"post",
             data:{"userId":userid},
-            url:"/Service/findOrderByUserId",
+            url:"/wzData/Service/findOrderByUserId",
             success:function (orderList) {
                 if(nursing.status==0) status="空闲中"; else status="服务中";
                 $("#NursingInfo").html("<h3>护工姓名：</h3><p>"+nursing.userName+"</p><h3>当前位置：</h3><p>"+nursing.address+"</p><h3>最后一次定位时间：</h3><p>"+nursing.gainTime+"</p><h3>当前状态：</h3><p>"+status+"</p>");
@@ -93,7 +103,7 @@
                     $.ajax({
                         type:"post",
                         data:{"userId":userid},
-                        url:"/Service/findOrderImg",
+                        url:"/wzData/Service/findOrderImg",
                         success:function (data) {
                             if(data!=null||data.length>0){
                                 $("#Img1").attr("src",internet+data[0].imagesPath+"/"+data[0].imageNewName);

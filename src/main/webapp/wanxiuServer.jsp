@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE HTML>
+<%@ page isELIgnored="false" %>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,11 +21,9 @@
 <header class="header left">
   <div class="left nav">
       <ul>
-          <li><i class="nav_1"></i><a href="indexData.jsp">大数据总览</a> </li>
-          <li class="nav_active"><i class="nav_2"></i><a href="#">服务大数据</a> </li>
-          <li><i class="nav_3"></i><a href="wanxiuTrend.jsp">健康大数据</a> </li>
-          <li><i class="nav_4"></i><a href="wanxiuCalling.jsp">话务大数据</a> </li>
-          <li><i class="nav_1"></i><a href="wanxiuMerchants.jsp">商家大数据</a> </li>
+          <li style="left:3%"><i class="nav_1"></i><a href="indexData.jsp">大数据总览</a> </li>
+          <li style="left:3%" class="nav_active"><i class="nav_2"></i><a href="#">服务大数据</a> </li>
+          <li style="left:3%"><i class="nav_3"></i><a href="wanxiuTrend.jsp">健康大数据</a> </li>
       </ul>
   </div>
     <div class="header_center left" style="position:relative">
@@ -32,7 +31,9 @@
     </div>
     <div class="right nav text_right">
         <ul>
-
+            <li style="right: 3%"><i class="nav_4"></i><a href="wanxiuCalling.jsp">话务大数据</a> </li>
+            <li style="right: 3%"><i class="nav_1"></i><a href="wanxiuMerchants.jsp">商家大数据</a> </li>
+            <li style="right: 3%"><i class="nav_1"></i><a href="government.jsp">项目统计</a> </li>
         </ul>
     </div>
 
@@ -136,5 +137,14 @@
     </div>
 
 </div>
+<span id="username" style="display: none">${user.loginName}</span>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var name=$("#username").text();
+        if(name==null||name==""){
+            location.href="/404.jsp";
+        }
+    })
+</script>
 </body>
 </html>

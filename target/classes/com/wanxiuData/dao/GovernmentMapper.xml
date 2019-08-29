@@ -8,7 +8,7 @@
     <select id="AllOrderCount" resultType="java.lang.Integer">
         select count(u.orderId)
         from userordergenerate u,oldpeopleinfo o
-        where u.consigneeName=o.cusname and u.orderStatus=4 and
+        where u.consignee=o.phone and u.orderStatus=4 and
         (o.clientType=24 ||
         o.clientType=28 ||
         o.clientType=25 ||
@@ -32,7 +32,7 @@
     <select id="CountSumHomeOrder" resultType="java.lang.Integer">
         select count(u.orderId)
         from userordergenerate u,oldpeopleinfo o
-        where u.consigneeName=o.cusname and u.orderStatus=4 and
+        where u.consignee=o.phone and u.orderStatus=4 and
         (o.clientType=35 ||
         o.clientType=37 ||
         o.clientType=47)
@@ -42,14 +42,14 @@
     </select>
     <select id="CountSumHomeOrderByMerchants" parameterType="java.lang.String" resultType="java.lang.Integer">
         select count(*) from userordergenerate u,oldpeopleinfo o
-        where u.consigneeName=o.cusname and u.orderStatus=4 and merchantName like #{merchants} and
+        where u.consignee=o.phone and u.orderStatus=4 and merchantName like #{merchants} and
         (o.clientType=35 ||
         o.clientType=37 ||
         o.clientType=47)
     </select>
     <select id="CountSumHomeOrderByNoMerchants" resultType="java.lang.Integer">
         select count(*) from userordergenerate u,oldpeopleinfo o
-        where u.consigneeName=o.cusname
+        where u.consignee=o.phone
         and u.orderStatus=4
         and merchantName not like '%手机%'
         and merchantName not like '%心理%'
@@ -65,21 +65,27 @@
     <select id="CountNormalGovernmentUser" resultType="java.lang.Integer">
         select count(*) from oldpeopleinfo where clientType=#{clientType} and hometownAreaCode like #{areaCode} and status!=0
     </select>
-    <select id="CountNormalGovernmentChangzhouUser" resultType="java.lang.Integer">
-        select count(*) from oldpeopleinfo where hometownAreaCode like #{areaCode} and status!=0 and(clientType=31 || clientType=42 || clientType=43)
+    <select id="CountGovernmentOrderByWanxiu" resultType="java.lang.Integer">
+        select count(o.orderId) from userordergenerate o,oldpeopleinfo u where o.consignee=u.phone and u.hometownAreaCode like #{AreaCode} and o.orderStatus=4 and o.merchantName like #{merchantName} and (u.clientType=31 || u.clientType=28 || u.clientType=49)
     </select>
-    <select id="CountNoNormalGovernmentUser" parameterType="java.lang.Integer" resultType="java.lang.Integer">
-        select count(*) from oldpeopleinfo where clientType=#{clientType}
+    <select id="CountGovernmentOrderByWanxiuNoMerchant" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(o.orderId) from userordergenerate o,oldpeopleinfo u where o.consignee=u.phone and u.hometownAreaCode like #{AreaCode} and o.orderStatus=4 and o.merchantName not like '%生活%' and o.merchantName not like '%康复%' and (u.clientType=31 || u.clientType=28 || u.clientType=49)
     </select>
-    <select id="CountGovernmentOrderByLocationAndMerchantName" resultType="java.lang.Integer">
-        select count(o.orderId) from userordergenerate o,oldpeopleinfo u where o.consigneeName=u.cusname and u.hometownAreaCode like #{location} and u.status!=0 and u.clientType=31 and o.merchantName like #{merchantName}
+    <select id="CountGovernmentOrderByChangzhou" resultType="java.lang.Integer">
+        select count(o.orderId) from userordergenerate o,oldpeopleinfo u where o.consignee=u.phone and u.hometownAreaCode like #{AreaCode} and o.orderStatus=4 and o.merchantName like #{merchantName} and (u.clientType=31 || u.clientType=24 || u.clientType=25 || u.clientType=42 || u.clientType=43 || u.clientType=50)
     </select>
-    <select id="CountGovernmentOrderByLocation" parameterType="java.lang.String" resultType="java.lang.Integer">
-        select count(o.orderId) from userordergenerate o,oldpeopleinfo u where o.consigneeName=u.cusname and u.hometownAreaCode like #{location} and u.status!=0 and u.clientType=31 and o.merchantName not like '%生活%' and o.merchantName not like '%康复%'
+    <select id="CountGovernmentOrderByChangzhouNoMerchant" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(o.orderId) from userordergenerate o,oldpeopleinfo u where o.consignee=u.phone and u.hometownAreaCode like #{AreaCode} and o.orderStatus=4 and o.merchantName not like '%生活%' and o.merchantName not like '%康复%' and (u.clientType=31|| u.clientType=24 || u.clientType=25 || u.clientType=42 || u.clientType=43 || u.clientType=50)
+    </select>
+    <select id="CountGovernmentOrderByLongxu" resultType="java.lang.Integer">
+        select count(o.orderId) from userordergenerate o,oldpeopleinfo u where o.consignee=u.phone and u.hometownAreaCode like #{AreaCode} and o.orderStatus=4 and o.merchantName like #{merchantName} and (u.clientType=31 || u.clientType=51 || u.clientType=52)
+    </select>
+    <select id="CountGovernmentOrderByLongxuNoMerchant" parameterType="java.lang.String" resultType="java.lang.Integer">
+        select count(o.orderId) from userordergenerate o,oldpeopleinfo u where o.consignee=u.phone and u.hometownAreaCode like #{AreaCode} and o.orderStatus=4 and o.merchantName not like '%生活%' and o.merchantName not like '%康复%' and (u.clientType=31 || u.clientType=51 || u.clientType=52)
     </select>
     <select id="OrderAnalysis" parameterType="java.lang.String" resultType="java.lang.Integer">
         select count(*) from userordergenerate u,oldpeopleinfo o
-        where o.cusname=u.consigneeName and
+        where o.consignee=u.phone and
         orderStatus=4 and
         o.hometownAreaCode like #{locationCode} and
         u.orderTime like #{time} and
@@ -87,7 +93,7 @@
     </select>
     <select id="OtherOrderAnalysis" parameterType="java.lang.String" resultType="java.lang.Integer">
         select count(*) from userordergenerate u,oldpeopleinfo o
-        where o.cusname=u.consigneeName and
+        where o.consignee=u.phone and
         o.hometownAreaCode like #{locationCode} and
         orderTime like #{time} and
         orderStatus=4 and

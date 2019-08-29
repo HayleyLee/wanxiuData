@@ -6,7 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
+<%@ page isELIgnored="false" %>
+<!DOCTYPE html>
 <head>
     <title>Title</title>
     <script src="static/js/scripts/Plugin/jquery-3.3.1.min.js"></script>
@@ -20,6 +21,15 @@
 </div>
 <div id="clear" style="clear: both"></div>
 <span id="merchantId" style="display: none">${param.merchantId}</span>
+<span id="username" style="display: none">${user.loginName}</span>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var name=$("#username").text();
+        if(name==null||name==""){
+            location.href="/404.jsp";
+        }
+    })
+</script>
 </body>
 <script>
     $(document).ready(function () {
@@ -29,13 +39,13 @@
         $.ajax({
             type:"post",
             data:{"merchantId":merchantId},
-            url:"/Merchants/findMerchantByMerchantId",
+            url:"/wzData/Merchants/findMerchantByMerchantId",
             success:function (merchant) {
                 if(merchant!=null){
                     var merchantsImages = headImgPath+merchant.merchantsImages;
                     var businessLicenseImage = headImgPath+merchant.businessLicenseImage;
-                    $("#merchantsImages").attr("src","static/images/pika.jpg");
-                    $("#businessLicenseImage").attr("src","static/images/pika.jpg");
+                    $("#merchantsImages").attr("src",merchantsImages);
+                    $("#businessLicenseImage").attr("src",businessLicenseImage);
                     $("#MerchantInfo").html("<h3 style='line-height:1%;color: #081832;'>商家：</h3><p style='color:#1f4c79'>"+merchant.merchantName+"</p><h3 style='line-height:1%;color: #081832;'>负责人：</h3><p style='color:#1f4c79'>"+merchant.responsiblePerson+"</p><h3 style='line-height:1%;color: #081832;'>联系方式：</h3><p style='color:#1f4c79'>"+merchant.phone+"</p><h3 style='line-height:1%;color: #081832;'>门店地址：</h3><p style='color:#1f4c79'>"+merchant.address+"</p><h3 style='line-height:1%;color: #081832;'>门店介绍：</h3>");
                     $("#clear").after("<p style='color:#1f4c79'>"+merchant.introductionStores+"</p>");
                 }

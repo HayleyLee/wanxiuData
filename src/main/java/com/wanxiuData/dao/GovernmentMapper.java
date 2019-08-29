@@ -15,10 +15,11 @@ public interface GovernmentMapper {
     Integer CountSumHomeOrderByMerchants(@Param(value = "merchants")String merchants);
     Integer CountSumHomeOrderByNoMerchants();
     Integer CountNormalGovernmentUser(@Param(value = "clientType")Integer clientType, @Param(value = "areaCode")String areaCode);
-    Integer CountNormalGovernmentChangzhouUser(@Param(value = "areaCode")String areaCode);
-    Integer CountNoNormalGovernmentUser(@Param(value = "clientType")Integer clientType);
-    Integer CountGovernmentOrderByLocationAndMerchantName(@Param(value = "location")String location,@Param(value = "merchantName")String merchantName);
-    Integer CountGovernmentOrderByLocation(@Param(value = "location")String location);
-    Integer OrderAnalysis(@Param(value = "locationCode") String locationCode,@Param(value = "time")String time,@Param(value = "merchantName")String merchantName);
-    Integer OtherOrderAnalysis(@Param(value = "locationCode") String locationCode,@Param(value = "time")String time);
+
+    Integer CountGovernmentOrderByWanxiu(@Param(value = "AreaCode")String ArarCode,@Param(value = "merchantName")String merchantName);
+    Integer CountGovernmentOrderByWanxiuNoMerchant(@Param(value = "AreaCode")String ArarCode);
+    Integer CountGovernmentOrderByChangzhou(@Param(value = "AreaCode")String ArarCode,@Param(value = "merchantName")String merchantName);
+    Integer CountGovernmentOrderByChangzhouNoMerchant(@Param(value = "AreaCode")String ArarCode);
+    Integer CountGovernmentOrderByLongxu(@Param(value = "AreaCode")String ArarCode,@Param(value = "merchantName")String merchantName);
+    Integer CountGovernmentOrderByLongxuNoMerchant(@Param(value = "AreaCode")String ArarCode);
 }

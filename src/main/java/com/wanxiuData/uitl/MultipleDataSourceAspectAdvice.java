@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class MultipleDataSourceAspectAdvice {
     @Around("execution(* com.wanxiuData.dao.*.*(..))")
     public Object doAround(ProceedingJoinPoint jp) throws Throwable {
-        if (jp.getTarget() instanceof BigDataMapper || jp.getTarget() instanceof ServiceMapper || jp.getTarget() instanceof UserMapper || jp.getTarget() instanceof CommoditytypeMapper || jp.getTarget() instanceof MerchantsMapper) {
+        if (jp.getTarget() instanceof BigDataMapper || jp.getTarget() instanceof ServiceMapper || jp.getTarget() instanceof UserMapper || jp.getTarget() instanceof CommoditytypeMapper || jp.getTarget() instanceof MerchantsMapper || jp.getTarget() instanceof GovernmentMapper) {
             MultipleDataSource.setDataSourceKey("ihome_dataSource");
         }else if(jp.getTarget() instanceof PbxMapper) {
             MultipleDataSource.setDataSourceKey("pbx_dataSource");

@@ -303,7 +303,7 @@ function timeMark() {
                         {
                             name: '正常',
                             type: 'bar',
-                            data: [data[0].normal+data[0].substitutes+data[0].dead,data[1].normal+data[1].substitutes+data[1].dead,data[2].normal+data[2].substitutes+data[2].dead],
+                            data: [data[0].normal+data[0].dead,data[1].normal+data[1].dead,data[2].normal+data[2].dead],
                             label: seriesLabel,
                             markPoint: {
                                 symbolSize: 1,
@@ -326,12 +326,6 @@ function timeMark() {
                                     }
                                 }
                             }
-                        },
-                        {
-                            name: '后补',
-                            type: 'bar',
-                            label: seriesLabel,
-                            data: [data[0].substitutes,data[1].substitutes,data[2].substitutes]
                         },
                         {
                             name: '死亡',

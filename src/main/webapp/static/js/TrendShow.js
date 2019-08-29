@@ -276,7 +276,7 @@ $(document).ready(function () {
     //残疾人情况分析
     $.ajax({
         type:"get",
-        url:"Old/Disability",
+        url:"/Old/Disability",
         success:function (data) {
             if(data!=null){
                 var body=data[0];  //肢体

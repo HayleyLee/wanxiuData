@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="wanxiuData">
-    <output-path>E:/wanxiuData/webapps/ROOT</output-path>
+    <output-path>E:/wanxiuData/webapps/wzData</output-path>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">

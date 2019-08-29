@@ -126,7 +126,7 @@ a:hover{
 .nav>ul>li{
     display: inline-block;
     width: 19%;
-    text-align: center;
+    text-align: left;
     height: 50px;
     position: relative;
     line-height: 50px;

@@ -210,7 +210,8 @@ $(document).ready(function () {
             histogramChart1.setOption({
                 grid: {
                     top: '20%',
-                    left: '23%'
+                    left: '23%',
+                    x2:'15%'
                 },
                 xAxis: {
                     show: false

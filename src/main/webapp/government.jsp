@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE HTML>
-<html lang="en">
+<%@ page isELIgnored="false" %>
+<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <title>梧州市云家庭大数据展示平台</title>
@@ -16,11 +16,9 @@
 <header class="header left">
     <div class="left nav">
         <ul>
-            <li class="nav_active"><i class="nav_1"></i><a href="#">大数据总览</a> </li>
-            <li><i class="nav_2"></i><a href="wanxiuServer.jsp">服务大数据</a> </li>
-            <li><i class="nav_3"></i><a href="wanxiuTrend.jsp">健康大数据</a> </li>
-            <li><i class="nav_4"></i><a href="wanxiuCalling.jsp">话务大数据</a> </li>
-            <li><i class="nav_1"></i><a href="wanxiuMerchants.jsp">商家大数据</a> </li>
+            <li style="left: 3%"><i class="nav_1"></i><a href="indexData.jsp">大数据总览</a> </li>
+            <li style="left: 3%"><i class="nav_2"></i><a href="wanxiuServer.jsp">服务大数据</a> </li>
+            <li style="left: 3%"><i class="nav_3"></i><a href="wanxiuTrend.jsp">健康大数据</a> </li>
         </ul>
     </div>
     <div class="header_center left" style="position:relative">
@@ -30,7 +28,9 @@
     </div>
     <div class="right nav text_right">
         <ul>
-
+            <li style="right: 3%"><i class="nav_4"></i><a href="wanxiuCalling.jsp">话务大数据</a> </li>
+            <li style="right: 3%"><i class="nav_1"></i><a href="wanxiuMerchants.jsp">商家大数据</a> </li>
+            <li style="right: 3%" class="nav_active"><i class="nav_1"></i><a href="government.jsp">项目统计</a> </li>
         </ul>
     </div>
 
@@ -43,7 +43,7 @@
             <div class="con_div_text01 left">
                 <img src="static/images/img/info_1.png" class="left text01_img"/>
                 <div class="left text01_div">
-                    <p>总人数</p>
+                    <p>政府购买服务人数</p>
                     <p id="OldPeople"></p>
                 </div>
             </div>
@@ -124,5 +124,14 @@
         </div>
     </div>
 </div>
+<span id="username" style="display: none">${user.loginName}</span>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var name=$("#username").text();
+        if(name==null||name==""){
+            location.href="/404.jsp";
+        }
+    })
+</script>
 </body>
 </html>
