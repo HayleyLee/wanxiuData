@@ -164,10 +164,9 @@ public class Redis {
     }
     public ArrayList<GovernmentOrder> readSQL(String strTime) {
         //查数据库
-        final String DB_URL = "jdbc:mysql://124.227.230.85:3306/sq_ihomeweb?useUnicode=true&characterEncoding=UTF-8";
-        // 数据库的用户名与密码，需要根据自己的设置
-        final String USER = "root";
-        final String PASS = "fdxcwr660312";
+        final String DB_URL = "************";
+        final String USER = "*********";
+        final String PASS = "*********";
         ArrayList<GovernmentOrder> list = new ArrayList<GovernmentOrder>();
         String[] areaCodeArr = new Area().getAreaCodeArr();
         String rec = "'%康复%'";
