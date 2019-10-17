@@ -65,4 +65,10 @@ public class PBXController {
     public Object[] findAllByTime(){
         return pbxService.findAllByTime();
     }
+
+    @ResponseBody
+    @RequestMapping("/countWeekCall")
+    public Object[] countWeekCall(){
+        return pbxService.countWeekCall();
+    }
 }

@@ -9,8 +9,9 @@
     <script src="static/js/scripts/Plugin/jquery-3.3.1.min.js"></script>
     <script src="static/js/scripts/Plugin/echarts.min.js"></script>
     <script src="static/js/TrendShow.js"></script>
+    <script src="static/js/clientWidthSize.js"></script>
 </head>
-<body>
+<body style="min-width: 1600px">
 <!--顶部-->
 <header class="header left">
   <div class="left nav">

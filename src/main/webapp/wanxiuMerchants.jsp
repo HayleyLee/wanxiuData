@@ -6,6 +6,9 @@
     <meta charset="UTF-8">
     <title>梧州市云家庭大数据展示平台</title>
     <link href="static/css/styles/common.css" rel="stylesheet">
+    <link href="static/css/demo.css" rel="stylesheet">
+    <link href="static/css/normalize.css" rel="stylesheet">
+    <link href="static/css/numberRock.css" rel="stylesheet">
     <script src="static/js/scripts/Plugin/jquery-3.3.1.min.js"></script>
     <script src="static/js/scripts/Plugin/echarts.min.js"></script>
     <%--<script src="static/js/scripts/Plugin/bmap.min.js"></script>--%>
@@ -14,9 +17,11 @@
     <link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
     <script src="static/js/scripts/Plugin/laydate/laydate.js"></script>
     <script src="static/layui/layui.all.js"></script>
+    <script src="static/js/clientWidthSize.js"></script>
+    <script src="static/js/bounty.js"></script>
     <script src="static/js/MerchantsShow.js"></script>
 </head>
-<body>
+<body style="min-width: 1600px">
 <!--顶部-->
 <header class="header left">
   <div class="left nav">
@@ -36,7 +41,6 @@
             <li style="right: 3%"><i class="nav_1"></i><a href="government.jsp">项目统计</a> </li>
         </ul>
     </div>
-
 </header>
 <!--内容部分-->
 <div class="con left">
@@ -47,14 +51,14 @@
               <img src="static/images/img/info_7.png" class="left text01_img"/>
               <div class="left text01_div">
                   <p>服务商家统计</p>
-                  <p id="Merchants"></p>
+                  <div class="js-odoo" id="Merchants" style="fill: #ffff43;"></div>
               </div>
           </div>
           <div class="con_div_text01 right">
               <img src="static/images/img/info_8.png" class="left text01_img"/>
               <div class="left text01_div">
                   <p>服务护工统计</p>
-                  <p id="Nursing"></p>
+                  <div class="js-odoo" id="Nursing" style="fill: #ffff43;"></div>
               </div>
           </div>
       </div>
@@ -63,31 +67,30 @@
               <img src="static/images/img/info_9.png" class="left text01_img"/>
               <div class="left text01_div">
                   <p>医疗团队统计</p>
-                  <p class="sky" id="Doctor"></p>
+                  <div class="js-odoo" id="Doctor" style="fill: #25f3e6;"></div>
               </div>
           </div>
           <div class="con_div_text01 right">
               <img src="static/images/img/info_10.png" class="left text01_img"/>
               <div class="left text01_div">
                   <p>志愿者统计</p>
-                  <p class="sky" id="Volunteer"></p>
+                  <div class="js-odoo" id="Volunteer" style="fill: #25f3e6;"></div>
               </div>
           </div>
       </div>
       <div class="con_div_text left">
-
           <div class="con_div_text01 left">
               <img src="static/images/img/info_14.png" class="left text01_img"/>
               <div class="left text01_div">
                   <p>社工人数统计</p>
-                  <p class="org" id="Social"></p>
+                  <div class="js-odoo" id="Social" style="fill: #ff4e4e;"></div>
               </div>
           </div>
           <div class="con_div_text01 right">
               <img src="static/images/img/info_12.png" class="left text01_img"/>
               <div class="left text01_div">
                   <p>合作机构统计</p>
-                  <p class="org" id="Institute"></p>
+                  <div class="js-odoo" id="Institute" style="fill: #ff4e4e;"></div>
               </div>
           </div>
       </div>
@@ -108,7 +111,7 @@
             <div class="div_any_child div_height" style="z-index:9999">
                 <div class="div_any_title any_title_width" style="z-index:9999"><img src="static/images/img/title_0.png" style="z-index:9999">服务商家分布地图 </div>
                 <div id="mapChart" style="width:94%;height:93%;display: inline-block;padding-left: 1.25%;padding-top:2.2%;margin-top:2.5%;margin-left:2.5%"></div>
-                <div style="width: 42%;height: 13%;display: inline-block;color:red;position: absolute;right: 2%;top: 6%;margin-right: 3%;background-color: rgba(0,0,0,0.5)">
+                <div style="width: 44%;height: 13%;display: inline-block;color:red;position: absolute;right: 2%;top: 6%;margin-right: 3%;background-color: rgba(0,0,0,0.5)">
                     <div style="display: inline-block;width:31%;text-align:center;margin: 2% 0 2% 2%">
                         <div style="color:#fff;font-size: 20px;line-height: 25px;">红色定位</div>
                         <div style="color:#ff602a;font-size: 15px;line-height: 25px;">当前无订单商家</div>

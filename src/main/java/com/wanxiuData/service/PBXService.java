@@ -12,4 +12,5 @@ public interface PBXService {
     Integer[] findCallByWorkIDToDay();
     Integer[] findByToDayHour();
     Object[] findAllByTime();
+    Object[] countWeekCall();
 }

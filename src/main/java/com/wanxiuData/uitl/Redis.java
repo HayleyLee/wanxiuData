@@ -41,9 +41,8 @@ public class Redis {
                 System.out.println("开始执行redis缓存任务（地区服务量统计）...");
                 countServiceByLocationRedisCache();
                 System.out.println("执行redis缓存任务（地区服务量统计）完成");
-                //System.out.println("执行redis缓存任务（地区服务量统计）完成...");
             }
-        }, time, 1000 * 60 * 60);// 这里设定函数定时执行
+        }, time, 1000 * 60 * 60);// 这里设定函数定时执行(1小时)
     }
     public void TimerByOldLocation(){
         Calendar calendar = Calendar.getInstance();
@@ -57,7 +56,6 @@ public class Redis {
                 System.out.println("开始执行redis缓存任务（老人定位）...");
                 findAllOldLocationRedisCache();
                 System.out.println("执行redis缓存任务（老人定位）完成");
-                //System.out.println("执行redis缓存任务（老人定位）完成...");
             }
         }, time, 1000 * 60 * 30);// 这里设定函数定时执行
     }
@@ -73,7 +71,6 @@ public class Redis {
                 System.out.println("开始执行redis缓存任务（统计政府购买服务订单数）...");
                 countAllOrderByGovernment();
                 System.out.println("执行redis缓存任务（统计政府购买服务订单数）完成");
-                //System.out.println("执行redis缓存任务（统计政府购买服务订单数）完成...");
             }
         }, time, 1000 * 60 * 60 * 6);// 这里设定函数定时执行
     }
@@ -111,9 +108,9 @@ public class Redis {
     private void countServiceByLocationRedisCache(){
         //去数据库
         Jedis jedis = new Jedis("localhost");
-        Integer wanxiu = serviceMapper.countServiceByLocation("77401");
-        Integer changzhou = serviceMapper.countServiceByLocation("77402");
-        Integer longxu = serviceMapper.countServiceByLocation("77403");
+        Integer wanxiu = serviceMapper.countServiceByLocation("450403");
+        Integer changzhou = serviceMapper.countServiceByLocation("450425");
+        Integer longxu = serviceMapper.countServiceByLocation("450424");
         //清空缓存
         jedis.del("locationWanxiu");
         jedis.del("locationChangzhou");
@@ -164,9 +161,9 @@ public class Redis {
     }
     public ArrayList<GovernmentOrder> readSQL(String strTime) {
         //查数据库
-        final String DB_URL = "************";
-        final String USER = "*********";
-        final String PASS = "*********";
+        final String DB_URL = "";
+        final String USER = "";
+        final String PASS = "";
         ArrayList<GovernmentOrder> list = new ArrayList<GovernmentOrder>();
         String[] areaCodeArr = new Area().getAreaCodeArr();
         String rec = "'%康复%'";

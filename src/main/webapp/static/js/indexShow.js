@@ -6,38 +6,23 @@ var temp3=0;
 var temp4=0;
 var temp5=0;
 var loading;
+var number;
 
-function IndexTitle(){
-    //总服务人数
-    $.ajax({
-        type:"get",
-        url:"/BigData/findOld",
-        success:function (data) {
-            $("#OldPeople").html(data);
-        }
-    });
+function IndexTitle() {
     //总服务量
     $.ajax({
         type:"get",
         url:"/BigData/findAllService",
         success:function (data) {
-            $("#Service").html(data);
+            bounty.default({ el:'#Service',value:data.toString() })
         }
     });
-    //线上服务量
+    //总服务人数
     $.ajax({
         type:"get",
-        url:"/BigData/onlineService",
+        url:"/BigData/findOld",
         success:function (data) {
-            $("#onlineService").html(data);
-        }
-    });
-    //线下服务量
-    $.ajax({
-        type:"get",
-        url:"/BigData/findService",
-        success:function (data) {
-            $("#offlineService").html(data);
+            bounty.default({ el:'#OldPeople',value:data.toString() })
         }
     });
     //今日服务量
@@ -45,7 +30,7 @@ function IndexTitle(){
         type:"get",
         url:"/BigData/toDayService",
         success:function (data) {
-            $("#toDayService").html(data);
+            bounty.default({ el:'#toDayService',value:data.toString() })
         }
     });
     //今日呼叫量
@@ -53,7 +38,24 @@ function IndexTitle(){
         type:"get",
         url:"/BigData/toDayCall",
         success:function (data) {
-            $("#toDayCall").html(data);
+            bounty.default({ el:'#toDayCall',value:data.toString() })
+        }
+    });
+    //线下服务量
+    $.ajax({
+        type:"get",
+        url:"/BigData/findService",
+        success:function (data) {
+            number=data;
+            bounty.default({ el:'#offlineService',value:data.toString() })
+        }
+    });
+    //线上服务量
+    $.ajax({
+        type:"get",
+        url:"/BigData/onlineService",
+        success:function (data) {
+            bounty.default({ el:'#onlineService',value:data.toString() })
         }
     });
 }
@@ -137,59 +139,59 @@ $(document).ready(function () {
                     value[i]=Number(tempValue[i]);
                 }
                 var lineChart = echarts.init(document.getElementById('lineChart'));
-                // option = {
-                //     title: {
-                //         textStyle: {
-                //             color: '#FFFFFF'
-                //         }
-                //     },
-                //     tooltip: {
-                //         trigger: 'axis',
-                //         axisPointer: {
-                //             type: 'shadow'
-                //         }
-                //     },
-                //     legend: {
-                //         data: ['Top']
-                //     },
-                //     grid: {
-                //         left: '3%',
-                //         right: '4%',
-                //         bottom: '3%',
-                //         containLabel: true
-                //     },
-                //     xAxis: {
-                //         type: 'value',
-                //         boundaryGap: [0, 0.01],
-                //         nameTextStyle: {
-                //             color: '#FFFFFF'
-                //         },
-                //         axisLine: {
-                //             lineStyle: {
-                //                 color: '#FFFFFF'
-                //             }
-                //         }
-                //     },
-                //     yAxis: {
-                //         type: 'category',
-                //         data: [name[2],name[1],name[0]],
-                //         nameTextStyle: {
-                //             color: '#FFFFFF'
-                //         },
-                //         axisLine: {
-                //             lineStyle: {
-                //                 color: '#FFFFFF'
-                //             }
-                //         }
-                //     },
-                //     series: [
-                //         {
-                //             name: 'Top',
-                //             type: 'bar',
-                //             data: [value[2],value[1],value[0]]
-                //         }
-                //     ]
-                // };
+                option = {
+                    title: {
+                        textStyle: {
+                            color: '#FFFFFF'
+                        }
+                    },
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'shadow'
+                        }
+                    },
+                    legend: {
+                        data: ['Top']
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis: {
+                        type: 'value',
+                        boundaryGap: [0, 0.01],
+                        nameTextStyle: {
+                            color: '#FFFFFF'
+                        },
+                        axisLine: {
+                            lineStyle: {
+                                color: '#FFFFFF'
+                            }
+                        }
+                    },
+                    yAxis: {
+                        type: 'category',
+                        data: [name[2],name[1],name[0]],
+                        nameTextStyle: {
+                            color: '#FFFFFF'
+                        },
+                        axisLine: {
+                            lineStyle: {
+                                color: '#FFFFFF'
+                            }
+                        }
+                    },
+                    series: [
+                        {
+                            name: 'Top',
+                            type: 'bar',
+                            data: [value[2],value[1],value[0]]
+                        }
+                    ]
+                };
                 option = {
                     title: {
                         textStyle: {

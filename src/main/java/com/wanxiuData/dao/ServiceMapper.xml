@@ -85,15 +85,7 @@
     </select>
     <!--按地区统计订单数-->
     <select id="countServiceByLocation" parameterType="java.lang.String" resultType="java.lang.Integer">
-        select count(distinct uo.orderId) from
-        (select uu.userId from
-	      (select distinct phone from oldpeopleinfo where instr(oldpeopleinfo.cid,#{location})>0 and status=1) oo
-	      left join
-	      (select distinct mobile,userId from userregister) uu
-	      on oo.phone = uu.mobile where uu.userId!="") xx
-        left join userordergenerate uo
-        on uo.userId = xx.userId
-        where uo.orderId!=""
+        select count(orderId) from userordergenerate where instr(clientType,#{location})>0 and orderStatus=4
     </select>
     <!--根据服务类型统计订单数-->
     <select id="CountServiceType" resultType="java.lang.Integer" parameterType="java.lang.Integer">

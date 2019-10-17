@@ -111,4 +111,42 @@ public class TimeFormat {
         time=year+"-"+StrMonth+"-"+StrDate+" "+hour+":"+minute+":"+second;
         return time;
     }
+    public String[] takeUWantTheDay(int number){
+        Calendar c = Calendar.getInstance();
+        int year = c.get(Calendar.YEAR);
+        int month = c.get(Calendar.MONTH)+1;
+        int day = c.get(Calendar.DATE);
+        String[] strTime = new String[number];
+        for(int i=0;i<strTime.length;i++){
+            if(day-i<1){
+                if(--month<10){
+                    if(--month==1 || --month==3 || --month==5 || --month==7 || --month==8 || --month==10 || --month==12){
+                        strTime[i]=year+"-0"+(--month)+"-"+(31-i+day);
+                    }
+                    else {
+                        strTime[i]=year+"-0"+(--month)+"-"+(30-i+day);
+                    }
+                }
+                else {
+                    if(--month==1 || --month==3 || --month==5 || --month==7 || --month==8 || --month==10 || --month==12){
+                        strTime[i]=year+"-"+(--month)+"-"+(31-i+day);
+                    }
+                    else {
+                        strTime[i]=year+"-"+(--month)+"-"+(30-i+day);
+                    }
+                }
+            }
+            else {
+                if(month<10){
+                    if(day-i>9) strTime[i] = year+"-0"+month+"-"+(day-i);
+                    else strTime[i] = year+"-0"+month+"-0"+(day-i);
+                }
+                else {
+                    if(day-i>9) strTime[i] = year+"-"+month+"-"+(day-i);
+                    else strTime[i] = year+"-"+month+"-0"+(day-i);
+                }
+            }
+        }
+        return strTime;
+    }
 }

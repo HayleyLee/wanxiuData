@@ -4,7 +4,7 @@ function timeMark() {
         type:"get",
         url:"/Government/AllPeopleCount",
         success:function (data) {
-            $("#OldPeople").html(data);
+            bounty.default({ el:'#OldPeople',value:data.toString() })
         }
     });
     //总订单
@@ -12,7 +12,7 @@ function timeMark() {
         type:"get",
         url:"/Government/AllOrderCount",
         success:function (data) {
-            $("#Order").html(data);
+            bounty.default({ el:'#Order',value:data.toString() })
         }
     });
     //手机用户人数
@@ -20,7 +20,7 @@ function timeMark() {
         type:"get",
         url:"/Government/CountAllPhoneUser",
         success:function (data) {
-            $("#Phone").html(data);
+            bounty.default({ el:'#Phone',value:data.toString() })
         }
     });
     //蓝手环用户人数
@@ -28,7 +28,7 @@ function timeMark() {
         type:"get",
         url:"/Government/CountAllRingUser",
         success:function (data) {
-            $("#Ring").html(data);
+            bounty.default({ el:'#Ring',value:data.toString() })
         }
     });
     //阳光用户人数
@@ -36,7 +36,7 @@ function timeMark() {
         type:"get",
         url:"/Government/CountSumHomeUser",
         success:function (data) {
-            $("#SumHomeUser").html(data);
+            bounty.default({ el:'#SumHomeUser',value:data.toString() })
         }
     });
     //阳光订单
@@ -44,7 +44,7 @@ function timeMark() {
         type:"get",
         url:"/Government/CountSumHomeOrder",
         success:function (data) {
-            $("#SumHomeOrder").html(data);
+            bounty.default({ el:'#SumHomeOrder',value:data.toString() })
         }
     });
     //阳光3城区人数统计

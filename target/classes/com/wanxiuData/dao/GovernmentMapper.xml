@@ -3,22 +3,11 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wanxiuData.dao.GovernmentMapper">
     <select id="AllPeopleCount" resultType="java.lang.Integer">
-        select count(*) from oldpeopleinfo where clientType=24 || clientType=28 || clientType=25 || clientType=31 || clientType=42 || clientType=43 || clientType=49 || clientType=50 || clientType=51 || clientType=52
+        select count(*) from oldpeopleinfo where status!=0 and (clientType=24 || clientType=28 || clientType=25 || clientType=31 || clientType=42 || clientType=43 || clientType=49 || clientType=50 || clientType=51 || clientType=52)
     </select>
     <select id="AllOrderCount" resultType="java.lang.Integer">
-        select count(u.orderId)
-        from userordergenerate u,oldpeopleinfo o
-        where u.consignee=o.phone and u.orderStatus=4 and
-        (o.clientType=24 ||
-        o.clientType=28 ||
-        o.clientType=25 ||
-        o.clientType=31 ||
-        o.clientType=42 ||
-        o.clientType=43 ||
-        o.clientType=49 ||
-        o.clientType=50 ||
-        o.clientType=51 ||
-        o.clientType=52)
+        select count(*) from userordergenerate
+        where orderStatus=4 and (clientType like '31%' || clientType like '50%')
     </select>
     <select id="CountAllPhoneUser" resultType="java.lang.Integer">
         select count(*) from oldpeopleinfo where equipmentId is not null and equipmentId != ""
@@ -30,12 +19,7 @@
         select count(*) from oldpeopleinfo where clientType=35 || clientType=37 || clientType=47
     </select>
     <select id="CountSumHomeOrder" resultType="java.lang.Integer">
-        select count(u.orderId)
-        from userordergenerate u,oldpeopleinfo o
-        where u.consignee=o.phone and u.orderStatus=4 and
-        (o.clientType=35 ||
-        o.clientType=37 ||
-        o.clientType=47)
+        select count(orderId) from userordergenerate where orderStatus=4 and (clientType like '35@%'||clientType like '37@%'||clientType like '47@%')
     </select>
     <select id="CountSumHomeUserByLocation" resultType="java.lang.Integer" parameterType="java.lang.Integer">
         select count(*) from oldpeopleinfo where clientType=#{location}

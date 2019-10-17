@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.text.DecimalFormat;
+import java.util.Calendar;
 
 @Service
 public class PBXServiceImpl implements PBXService {
@@ -43,11 +44,9 @@ public class PBXServiceImpl implements PBXService {
     public Integer findToDay() {
         TimeFormat timeFormat = new TimeFormat();
         String time = timeFormat.getToDayStrTime();//返回格式：20xx-xx-xx
-        Integer toDay = pbxMapper.findToDay(time + "%");
-        if(toDay>0){
-            return toDay;
-        }
-        return 0;
+        Integer outToDay = pbxMapper.findOutCallToDay(time + "%");
+        Integer inToDay = pbxMapper.findInCallToDay(time + "%");
+        return outToDay+inToDay;
     }
 
     @Override
@@ -65,8 +64,8 @@ public class PBXServiceImpl implements PBXService {
         TimeFormat timeFormat = new TimeFormat();
         String time = timeFormat.getToDayStrTime();//返回格式：20xx-xx-xx
         String yesterDay = timeFormat.getYesterdayStrTime();
-        Double toDayData = (double)pbxMapper.findToDay(time + "%");
-        Double yesterDayData = (double)pbxMapper.findToDay(yesterDay + "%");
+        Double toDayData = ((double)pbxMapper.findInCallToDay(time + "%"))+((double)pbxMapper.findOutCallToDay(time + "%"));
+        Double yesterDayData = ((double)pbxMapper.findInCallToDay(yesterDay + "%"))+((double)pbxMapper.findOutCallToDay(yesterDay + "%"));
         DecimalFormat df=new DecimalFormat("0.00");//设置保留位数
         if(toDayData>0 && yesterDayData>0){
             return df.format(toDayData/yesterDayData*100);
@@ -163,5 +162,19 @@ public class PBXServiceImpl implements PBXService {
             }
         }
         return new Object[]{rslTime,rsl};
+    }
+
+    @Override
+    public Object[] countWeekCall() {
+        Integer[] workID = {1001,1002,1003,1004,2001,2003,3002,3005};
+        TimeFormat time = new TimeFormat();
+        String[] timeArr = time.takeUWantTheDay(10);
+        Integer[][] Data = new Integer[workID.length][timeArr.length];
+        for(int i=0;i<workID.length;i++){
+            for(int j=0;j<timeArr.length;j++){
+                Data[i][j]=pbxMapper.findCallByWorkIDToDay(workID[i], timeArr[j]+"%");
+            }
+        }
+        return new Object[]{timeArr,Data};
     }
 }

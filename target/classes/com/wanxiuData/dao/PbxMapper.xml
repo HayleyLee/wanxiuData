@@ -3,19 +3,19 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wanxiuData.dao.PbxMapper">
     <select id="findAll" resultType="java.lang.Integer">
-        select count(*) from liancdrall where caller_id_name not like 'Extension%' and billsec>0
+        select count(*) from liancdrall where caller_id_name not like 'Extension%' and start_stamp!=end_stamp
     </select>
     <select id="findOutCall" resultType="java.lang.Integer">
-        select COUNT(*) as sum FROM lianfsdb.liancdrall a1 where true and (a1.liancalltype='outcall')
+        select COUNT(*) as sum FROM lianfsdb.liancdrall a1 where true and (a1.liancalltype='outcall') and start_stamp!=end_stamp
     </select>
     <select id="findInCall" resultType="java.lang.Integer">
-        select COUNT(*) as sum from lianfsdb.liancdrall a1 where true and (a1.liancalltype='incall') and (a1.bleg_uuid!='')
+        select COUNT(*) as sum from lianfsdb.liancdrall a1 where true and (a1.liancalltype='incall') and (a1.bleg_uuid!='') and start_stamp!=end_stamp
     </select>
     <select id="findToDay" parameterType="java.lang.String" resultType="java.lang.Integer">
-        select count(*) from liancdrall where caller_id_name not like 'Extension%' and billsec>0 and liancalltype is not null and liancreatetime like #{time}
+        select count(*) from liancdrall where caller_id_name not like 'Extension%' and start_stamp!=end_stamp and liancalltype is not null and liancreatetime like #{time}
     </select>
     <select id="findByWorkID" resultType="java.lang.Integer">
-        select count(*) from liancdrall where caller_id_name not like 'Extension%' and billsec>0 and caller_id_name = #{workID}
+        select count(*) from liancdrall where caller_id_name not like 'Extension%' and caller_id_name = #{workID}
     </select>
     <select id="findOutCallToDay" parameterType="java.lang.String" resultType="java.lang.Integer">
         select
@@ -24,10 +24,9 @@
         lianfsdb.liancdrall a1
         WHERE
         true
+        and start_stamp!=end_stamp
         and (a1.liancalltype='outcall')
-        and caller_id_name
-        not like 'Extension%'
-        and billsec>0
+        and caller_id_name not like 'Extension%'
         and liancalltype is not null
         and liancreatetime like #{time};
     </select>
@@ -37,10 +36,10 @@
         as sum from
         lianfsdb.liancdrall a1
         where true
+        and start_stamp!=end_stamp
         and (a1.liancalltype='incall')
         and (a1.bleg_uuid!='')
         and caller_id_name not like 'Extension%'
-        and billsec>0
         and liancalltype is not null
         and liancreatetime like #{time};
     </select>
@@ -49,11 +48,10 @@
         count(*)
         from liancdrall
         where caller_id_name not like 'Extension%'
-        and billsec>0
         and caller_id_name = #{workID}
         and liancreatetime like #{time};
     </select>
     <select id="findAllByTime" resultType="java.lang.Integer">
-        select count(*) from liancdrall where caller_id_name not like 'Extension%' and billsec>0 and liancreatetime&gt;=#{startTime} and liancreatetime&lt;=#{endTime}
+        select count(*) from liancdrall where caller_id_name not like 'Extension%' and start_stamp!=end_stamp and liancreatetime&gt;=#{startTime} and liancreatetime&lt;=#{endTime}
     </select>
 </mapper>

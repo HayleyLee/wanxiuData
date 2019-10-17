@@ -142,7 +142,7 @@ function ServerTitle(){
         url:"/Old/CountOldByLocation",
         data:{"location":1},
         success:function (data) {
-            $("#wanxiuOld").html(data);
+            bounty.default({ el:'#wanxiuOld',value:data.toString() })
         }
     });
     //长洲区用户数
@@ -151,7 +151,7 @@ function ServerTitle(){
         url:"/Old/CountOldByLocation",
         data:{"location":2},
         success:function (data) {
-            $("#changzhouOld").html(data);
+            bounty.default({ el:'#changzhouOld',value:data.toString() })
         }
     });
     //龙圩区用户数
@@ -161,6 +161,7 @@ function ServerTitle(){
         data:{"location":3},
         success:function (data) {
             $("#longxuOld").html(data);
+            bounty.default({ el:'#longxuOld',value:data.toString() })
         }
     });
     //周边用户数
@@ -169,7 +170,7 @@ function ServerTitle(){
         url:"/Old/CountOldByLocation",
         data:{"location":0},
         success:function (data) {
-            $("#zhoubianOld").html(data);
+            bounty.default({ el:'#zhoubianOld',value:data.toString() })
         }
     });
     //阳光家园用户数
@@ -177,7 +178,7 @@ function ServerTitle(){
         type:"get",
         url:"/Old/countDisability",
         success:function (data) {
-            $("#Disability").html(data)
+            bounty.default({ el:'#Disability',value:data.toString() })
         }
     });
     //总用户数
@@ -185,7 +186,7 @@ function ServerTitle(){
         type:"get",
         url:"/BigData/findOld",
         success:function (data) {
-            $("#allOld").html(data)
+            bounty.default({ el:'#allOld',value:data.toString() })
         }
     });
 }

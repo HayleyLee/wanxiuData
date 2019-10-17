@@ -6,6 +6,9 @@
     <meta charset="UTF-8">
     <title>梧州市云家庭大数据展示平台</title>
     <link href="static/css/styles/common.css" rel="stylesheet">
+    <link href="static/css/demo.css" rel="stylesheet">
+    <link href="static/css/normalize.css" rel="stylesheet">
+    <link href="static/css/numberRock.css" rel="stylesheet">
     <script src="static/js/scripts/Plugin/jquery-3.3.1.min.js"></script>
     <script src="static/js/scripts/Plugin/echarts.min.js"></script>
     <%--<script src="static/js/scripts/Plugin/bmap.min.js"></script>--%>
@@ -14,9 +17,11 @@
     <link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
     <script src="static/js/scripts/Plugin/laydate/laydate.js"></script>
     <script src="static/layui/layui.all.js"></script>
+    <script src="static/js/clientWidthSize.js"></script>
+    <script src="static/js/bounty.js"></script>
     <script src="static/js/ServerShow.js"></script>
 </head>
-<body>
+<body style="min-width: 1600px">
 <!--顶部-->
 <header class="header left">
   <div class="left nav">
@@ -47,14 +52,14 @@
               <img src="static/images/img/info_15.png" class="left text01_img"/>
               <div class="left text01_div">
                   <p>万秀区用户数</p>
-                  <p id="wanxiuOld"></p>
+                  <div class="js-odoo" id="wanxiuOld" style="fill: #ffff43;"></div>
               </div>
           </div>
           <div class="con_div_text01 right">
               <img src="static/images/img/info_15.png" class="left text01_img"/>
               <div class="left text01_div">
                   <p>长洲区用户数</p>
-                  <p id="changzhouOld"></p>
+                  <div class="js-odoo" id="changzhouOld" style="fill: #ffff43;"></div>
               </div>
           </div>
       </div>
@@ -63,14 +68,14 @@
               <img src="static/images/img/info_10.png" class="left text01_img"/>
               <div class="left text01_div">
                   <p>龙圩区用户数</p>
-                  <p class="sky" id="longxuOld"></p>
+                  <div class="js-odoo" id="longxuOld" style="fill: #25f3e6;"></div>
               </div>
           </div>
           <div class="con_div_text01 right">
               <img src="static/images/img/info_10.png" class="left text01_img"/>
               <div class="left text01_div">
                   <p>藤县用户数</p>
-                  <p class="sky" id="zhoubianOld"></p>
+                  <div class="js-odoo" id="zhoubianOld" style="fill: #25f3e6;"></div>
               </div>
           </div>
       </div>
@@ -80,14 +85,14 @@
               <img src="static/images/img/info_14.png" class="left text01_img"/>
               <div class="left text01_div">
                   <p>阳光家园用户数</p>
-                  <p class="org" id="Disability"></p>
+                  <div class="js-odoo" id="Disability" style="fill: #ff4e4e;"></div>
               </div>
           </div>
           <div class="con_div_text01 right">
               <img src="static/images/img/info_14.png" class="left text01_img"/>
               <div class="left text01_div">
                   <p>总用户数</p>
-                  <p class="org" id="allOld"></p>
+                  <div class="js-odoo" id="allOld" style="fill: #ff4e4e;"></div>
               </div>
           </div>
       </div>
@@ -108,7 +113,7 @@
             <div class="div_any_child div_height" style="z-index:9999">
                 <div class="div_any_title any_title_width" style="z-index:9999"><img src="static/images/img/title_0.png" style="z-index:9999">护工服务监督地图 </div>
                 <div id="mapChart" style="width:94%;height:93%;display: inline-block;padding-left: 1.25%;padding-top:2.2%;margin-top:2.5%;margin-left:2.5%"></div>
-                <div style="width: 42%;height: 13%;display: inline-block;color:red;position: absolute;right: 2%;top: 6%;margin-right: 3%;background-color: rgba(0,0,0,0.5)">
+                <div style="width: 44%;height: 13%;display: inline-block;color:red;position: absolute;right: 2%;top: 6%;margin-right: 3%;background-color: rgba(0,0,0,0.5)">
                     <div style="display: inline-block;width:31%;text-align:center;margin: 2% 0 2% 2%">
                         <div style="color:#fff;font-size: 20px;line-height: 25px;">红色定位</div>
                         <div style="color:#ff602a;font-size: 15px;line-height: 25px;">无订单且不在服务状态</div>

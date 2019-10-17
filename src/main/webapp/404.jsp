@@ -22,7 +22,7 @@
         a:hover{text-decoration:underline;}
     </style>
 </head>
-<body>
+<body style="min-width: 1600px">
 <div class="wrap">
     <table>
         <tr>

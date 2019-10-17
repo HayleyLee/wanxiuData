@@ -16,7 +16,7 @@
 <script src="static/js/html5.js"></script>
 <![endif]-->
 </head>
-<body>
+<body style="min-width: 1600px">
 		<div class="container demo-1">
 			<div class="content">
 				<div id="large-header" class="large-header">

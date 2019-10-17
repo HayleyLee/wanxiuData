@@ -5,13 +5,18 @@
     <meta charset="UTF-8">
     <title>梧州市云家庭大数据展示平台</title>
     <link href="static/css/styles/common.css" rel="stylesheet">
+    <link href="static/css/demo.css" rel="stylesheet">
+    <link href="static/css/normalize.css" rel="stylesheet">
+    <link href="static/css/numberRock.css" rel="stylesheet">
     <script src="static/js/scripts/Plugin/jquery-3.3.1.min.js"></script>
     <script src="static/js/scripts/Plugin/echarts.min.js"></script>
     <script src="static/js/scripts/Plugin/laydate/laydate.js"></script>
     <script src="static/layui/layui.all.js"></script>
+    <script src="static/js/clientWidthSize.js"></script>
+    <script src="static/js/bounty.js"></script>
     <script src="static/js/Government.js"></script>
 </head>
-<body style="height: 100%; margin: 0">
+<body style="height: 100%; margin: 0; min-width: 1600px">
 <!--顶部-->
 <header class="header left">
     <div class="left nav">
@@ -44,14 +49,14 @@
                 <img src="static/images/img/info_1.png" class="left text01_img"/>
                 <div class="left text01_div">
                     <p>政府购买服务人数</p>
-                    <p id="OldPeople"></p>
+                    <div id="OldPeople" class="js-odoo" style="fill: #ffff43;"></div>
                 </div>
             </div>
             <div class="con_div_text01 right">
                 <img src="static/images/img/info_2.png" class="left text01_img"/>
                 <div class="left text01_div">
                     <p>总订单</p>
-                    <p id="Order"></p>
+                    <div id="Order" class="js-odoo" style="fill: #ffff43;"></div>
                 </div>
             </div>
         </div>
@@ -60,14 +65,14 @@
                 <img src="static/images/img/info_3.png" class="left text01_img"/>
                 <div class="left text01_div">
                     <p>手机用户人数</p>
-                    <p class="sky" id="Phone"></p>
+                    <div class="js-odoo" id="Phone" style="fill: #25f3e6;"></div>
                 </div>
             </div>
             <div class="con_div_text01 right">
                 <img src="static/images/img/info_4.png" class="left text01_img"/>
                 <div class="left text01_div">
                     <p>手环用户人数</p>
-                    <p class="sky" id="Ring"></p>
+                    <div class="js-odoo" id="Ring" style="fill: #25f3e6;"></div>
                 </div>
             </div>
         </div>
@@ -77,14 +82,14 @@
                 <img src="static/images/img/info_16.png" class="left text01_img"/>
                 <div class="left text01_div">
                     <p>阳光用户人数</p>
-                    <p class="org" id="SumHomeUser"></p>
+                    <div class="js-odoo" id="SumHomeUser" style="fill: #ff4e4e;"></div>
                 </div>
             </div>
             <div class="con_div_text01 right">
                 <img src="static/images/img/info_6.png" class="left text01_img"/>
                 <div class="left text01_div">
                     <p>阳光订单</p>
-                    <p class="org" id="SumHomeOrder"></p>
+                    <div class="js-odoo" id="SumHomeOrder" style="fill: #ff4e4e;"></div>
                 </div>
             </div>
         </div>

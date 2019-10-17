@@ -5,7 +5,7 @@ function CallingTitle(){
         url:"/BigData/onlineService",
         success:function (data) {
             if(data>=0){
-                $("#allCall").html(data);
+                bounty.default({ el:'#allCall',value:data.toString() })
             }
         },
         error:function () {
@@ -18,7 +18,7 @@ function CallingTitle(){
         url:"/PBX/findOutCall",
         success:function (data) {
             if(data>=0){
-                $("#OutCall").html(data);
+                bounty.default({ el:'#OutCall',value:data.toString() })
             }
         },
         error:function () {
@@ -31,7 +31,7 @@ function CallingTitle(){
         url:"/PBX/findInCall",
         success:function (data) {
             if(data>=0){
-                $("#InCall").html(data);
+                bounty.default({ el:'#InCall',value:data.toString() })
             }
         },
         error:function () {
@@ -44,7 +44,7 @@ function CallingTitle(){
         url:"/PBX/findOutCallToDay",
         success:function (data) {
             if(data>=0){
-                $("#OutCallToDay").html(data);
+                bounty.default({ el:'#OutCallToDay',value:data.toString() })
             }
         },
         error:function () {
@@ -57,7 +57,7 @@ function CallingTitle(){
         url:"/PBX/findInCallToDay",
         success:function (data) {
             if(data>=0){
-                $("#InCallToDay").html(data);
+                bounty.default({ el:'#InCallToDay',value:data.toString() })
             }
         },
         error:function () {
@@ -70,7 +70,7 @@ function CallingTitle(){
         url:"/PBX/Percentage",
         success:function (data) {
             if (data!=null){
-                $("#Percentage").html(data+"%");
+                bounty.default({ el:'#Percentage',value:data+"%" })
             }
         },
         error:function () {
@@ -360,77 +360,175 @@ $(document).ready(function () {
             alert("获取今日线上服务数据走势，请联系管理员");
         }
     });
-    //历年线上服务数据统计
+    //每周话务坐席通话统计
     $.ajax({
         type:"get",
-        url:"/PBX/findAllByTime",
-        success:function (data) {
-            if(data!=null){
-                var histogramChart2 = echarts.init(document.getElementById('histogramChart2'));
-                histogramChart2.setOption({
-                    color:['#FD6C88'],
-                    grid:{
-                        left: '5%',
-                        right: '5%',
-                        bottom: '10%',
-                        containLabel: true
+        url:"/PBX/countWeekCall",
+        success:function (rsl) {
+            var timeArr = rsl[0];
+            var data = rsl[1];
+            var myChart = echarts.init(document.getElementById('PbxWeek'));
+            var option = {
+                tooltip: {
+                    color: "#ffffff",
+                    trigger: 'axis'
+                },
+                legend: {
+                    data:['李丽桢','周燕翘','郑少欣','李梅玲','苏佳亮','李静','于志杏','陈柳桦']
+                },
+                grid: {
+                    left: '3%',
+                    right: '4%',
+                    bottom: '3%',
+                    color:'#ffffff',
+                    containLabel: true
+                },
+                xAxis: {
+                    type: 'category',
+                    boundaryGap: false,
+                    axisLine: {
+                        lineStyle: {
+                            color: '#ffffff'
+                        }
                     },
-                    tooltip : {
-                        trigger: 'item',
-                        formatter: "{a}<br/>{b}<br/>{c}次"
+                    data: timeArr
+                },
+                yAxis: {
+                    type: 'value',
+                    axisLine: {
+                        lineStyle: {
+                            color: '#ffffff'
+                        }
+                    }
+                },
+                series: [
+                    {
+                        name:'李丽桢',
+                        type:'line',
+                        stack: '总量',
+                        data:[data[0][0], data[0][1], data[0][2], data[0][3], data[0][4], data[0][5], data[0][6], data[0][7], data[0][8], data[0][9]]
                     },
-                    calculable : true,
-                    yAxis : [
-                        {
-                            type : 'category',
-                            data : data[0],
-                            axisLine:{
-                                lineStyle:{
-                                    color: '#FD6C88'
-                                }
-                            },
-                            axisLabel : {
-                                textStyle: {
-                                    color: '#fff'
-                                }
-                            }
-                        }
-                    ],
-                    xAxis : [
-                        {
-                            type : 'value',
-                            axisLine:{
-                                lineStyle:{
-                                    color: '#FD6C88'
-                                }
-                            },
-                            splitLine: {
-                                "show": false
-                            },
-                            axisLabel: {
-                                textStyle: {
-                                    color: '#fff'
-                                },
-                                formatter: function (value) {
-                                    return value + ""
-                                }
-                            }
-                        }
-                    ],
-                    series : [
-                        {
-                            name:'历年线上服务',
-                            type:'bar',
-                            barWidth : 20,
-                            data:data[1]
-                        }
-                    ]
-                })
-            }
+                    {
+                        name:'周燕翘',
+                        type:'line',
+                        stack: '总量',
+                        data:[data[1][0], data[1][1], data[1][2], data[1][3], data[1][4], data[1][5], data[1][6], data[1][7], data[1][8], data[1][9]]
+                    },
+                    {
+                        name:'郑少欣',
+                        type:'line',
+                        stack: '总量',
+                        data:[data[2][0], data[2][1], data[2][2], data[2][3], data[2][4], data[2][5], data[2][6], data[2][7], data[2][8], data[2][9]]
+                    },
+                    {
+                        name:'李梅玲',
+                        type:'line',
+                        stack: '总量',
+                        data:[data[3][0], data[3][1], data[3][2], data[3][3], data[3][4], data[3][5], data[3][6], data[3][7], data[3][8], data[3][9]]
+                    },
+                    {
+                        name:'苏佳亮',
+                        type:'line',
+                        stack: '总量',
+                        data:[data[4][0], data[4][1], data[4][2], data[4][3], data[4][4], data[4][5], data[4][6], data[4][7], data[4][8], data[4][9]]
+                    },
+                    {
+                        name:'李静',
+                        type:'line',
+                        stack: '总量',
+                        data:[data[5][0], data[5][1], data[5][2], data[5][3], data[5][4], data[5][5], data[5][6], data[5][7], data[5][8], data[5][9]]
+                    },
+                    {
+                        name:'于志杏',
+                        type:'line',
+                        stack: '总量',
+                        data:[data[6][0], data[6][1], data[6][2], data[6][3], data[6][4], data[6][5], data[6][6], data[6][7], data[6][8], data[6][9]]
+                    },
+                    {
+                        name:'陈柳桦',
+                        type:'line',
+                        stack: '总量',
+                        data:[data[7][0], data[7][1], data[7][2], data[7][3], data[7][4], data[7][5], data[7][6], data[7][7], data[7][8], data[7][9]]
+                    }
+                ]
+            };
+            myChart.setOption(option);
         },
         error:function () {
-            alert("获取历年线上数据失败，请联系管理员");
+            alert("获取每周坐席数据失败，请联系管理员");
         }
     });
+    //历年线上服务数据统计
+    // $.ajax({
+    //     type:"get",
+    //     url:"/PBX/findAllByTime",
+    //     success:function (data) {
+    //         if(data!=null){
+    //             var histogramChart2 = echarts.init(document.getElementById('histogramChart2'));
+    //             histogramChart2.setOption({
+    //                 color:['#FD6C88'],
+    //                 grid:{
+    //                     left: '5%',
+    //                     right: '5%',
+    //                     bottom: '10%',
+    //                     containLabel: true
+    //                 },
+    //                 tooltip : {
+    //                     trigger: 'item',
+    //                     formatter: "{a}<br/>{b}<br/>{c}次"
+    //                 },
+    //                 calculable : true,
+    //                 yAxis : [
+    //                     {
+    //                         type : 'category',
+    //                         data : data[0],
+    //                         axisLine:{
+    //                             lineStyle:{
+    //                                 color: '#FD6C88'
+    //                             }
+    //                         },
+    //                         axisLabel : {
+    //                             textStyle: {
+    //                                 color: '#fff'
+    //                             }
+    //                         }
+    //                     }
+    //                 ],
+    //                 xAxis : [
+    //                     {
+    //                         type : 'value',
+    //                         axisLine:{
+    //                             lineStyle:{
+    //                                 color: '#FD6C88'
+    //                             }
+    //                         },
+    //                         splitLine: {
+    //                             "show": false
+    //                         },
+    //                         axisLabel: {
+    //                             textStyle: {
+    //                                 color: '#fff'
+    //                             },
+    //                             formatter: function (value) {
+    //                                 return value + ""
+    //                             }
+    //                         }
+    //                     }
+    //                 ],
+    //                 series : [
+    //                     {
+    //                         name:'历年线上服务',
+    //                         type:'bar',
+    //                         barWidth : 20,
+    //                         data:data[1]
+    //                     }
+    //                 ]
+    //             })
+    //         }
+    //     },
+    //     error:function () {
+    //         alert("获取历年线上数据失败，请联系管理员");
+    //     }
+    // });
     setInterval(function(){CallingTitle();}, 40000);//轮询title6项数据  40秒
 });

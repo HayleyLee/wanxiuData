@@ -6,6 +6,9 @@
     <meta charset="UTF-8">
     <title>梧州市云家庭大数据展示平台</title>
     <link href="static/css/styles/common.css" rel="stylesheet">
+    <link href="static/css/demo.css" rel="stylesheet">
+    <link href="static/css/normalize.css" rel="stylesheet">
+    <link href="static/css/numberRock.css" rel="stylesheet">
     <script src="static/js/scripts/Plugin/jquery-3.3.1.min.js"></script>
     <script src="static/js/scripts/Plugin/echarts.min.js"></script>
     <%--<script src="static/js/scripts/Plugin/bmap.min.js"></script>--%>
@@ -14,9 +17,11 @@
     <link rel="stylesheet" href="http://api.map.baidu.com/library/SearchInfoWindow/1.5/src/SearchInfoWindow_min.css" />
     <script src="static/js/scripts/Plugin/laydate/laydate.js"></script>
     <script src="static/layui/layui.all.js"></script>
+    <script src="static/js/clientWidthSize.js"></script>
+    <script src="static/js/bounty.js"></script>
     <script src="static/js/indexShow.js"></script>
 </head>
-<body>
+<body style="min-width: 1600px">
 <!--顶部-->
 <header class="header left">
     <div class="left nav">
@@ -27,9 +32,7 @@
         </ul>
     </div>
     <div class="header_center left" style="position:relative">
-
         <h2><strong>梧州市云家庭大数据展示平台</strong></h2>
-
     </div>
     <div class="right nav text_right">
         <ul>
@@ -49,14 +52,14 @@
                 <img src="static/images/img/info_1.png" class="left text01_img"/>
                 <div class="left text01_div">
                     <p>服务人数</p>
-                    <p id="OldPeople"></p>
+                    <div id="OldPeople" class="js-odoo" style="fill: #ffff43;"></div>
                 </div>
             </div>
             <div class="con_div_text01 right">
                 <img src="static/images/img/info_2.png" class="left text01_img"/>
                 <div class="left text01_div">
                     <p>总服务量</p>
-                    <p id="Service"></p>
+                    <div id="Service" class="js-odoo" style="fill: #ffff43;"></div>
                 </div>
             </div>
         </div>
@@ -65,14 +68,14 @@
                 <img src="static/images/img/info_3.png" class="left text01_img"/>
                 <div class="left text01_div">
                     <p>线上服务</p>
-                    <p class="sky" id="onlineService"></p>
+                    <div id="onlineService" class="js-odoo" style="fill: #25f3e6;"></div>
                 </div>
             </div>
             <div class="con_div_text01 right">
                 <img src="static/images/img/info_4.png" class="left text01_img"/>
                 <div class="left text01_div">
                     <p>线下服务</p>
-                    <p class="sky" id="offlineService"></p>
+                    <div id="offlineService" class="js-odoo" style="fill: #25f3e6;"></div>
                 </div>
             </div>
         </div>
@@ -82,14 +85,14 @@
                 <img src="static/images/img/info_16.png" class="left text01_img"/>
                 <div class="left text01_div">
                     <p>今日服务量</p>
-                    <p class="org" id="toDayService"></p>
+                    <div id="toDayService" class="js-odoo" style="fill: #ff4e4e;"></div>
                 </div>
             </div>
             <div class="con_div_text01 right">
                 <img src="static/images/img/info_6.png" class="left text01_img"/>
                 <div class="left text01_div">
                     <p>今日呼叫量</p>
-                    <p class="org" id="toDayCall"></p>
+                    <div id="toDayCall"  class="js-odoo" style="fill: #ff4e4e;"></div>
                 </div>
             </div>
         </div>
@@ -141,7 +144,7 @@
         if(name==null||name==""){
             location.href="/404.jsp";
         }
-    })
+    });
 </script>
 </body>
 </html>

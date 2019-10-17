@@ -1,0 +1,11 @@
+
+@font-face{
+    font-family: 'ITV Reem';
+    src: url(/static/fonts/itvreem.woff) format('woff');
+}
+.js-odoo{
+    width: 120px;
+    font-size: 28px;
+    font-family: "ITV Reem";
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+}

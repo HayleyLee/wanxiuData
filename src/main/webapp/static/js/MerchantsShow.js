@@ -7,7 +7,7 @@ $(document).ready(function () {
         url:"/Merchants/MerchantsCount",
         success:function (data) {
             if(data!=null){
-                $("#Merchants").html(data);
+                bounty.default({ el:'#Merchants',value:data.toString() })
             }
         },
         error:function () {
@@ -20,7 +20,7 @@ $(document).ready(function () {
         url:"/Merchants/NursingCount",
         success:function (data) {
             if(data!=null){
-                $("#Nursing").html(data);
+                bounty.default({ el:'#Nursing',value:data.toString() })
             }
         },
         error:function () {
@@ -33,7 +33,7 @@ $(document).ready(function () {
         url:"/Merchants/DoctorCount",
         success:function (data) {
             if(data!=null){
-                $("#Doctor").html(data);
+                bounty.default({ el:'#Doctor',value:data.toString() })
             }
         },
         error:function () {
@@ -46,7 +46,7 @@ $(document).ready(function () {
         url:"/Merchants/VolunteerCount",
         success:function (data) {
             if(data!=null){
-                $("#Volunteer").html(data);
+                bounty.default({ el:'#Volunteer',value:data.toString() })
             }
         },
         error:function () {
@@ -59,7 +59,7 @@ $(document).ready(function () {
         url:"/Merchants/SocialCount",
         success:function (data) {
             if(data!=null){
-                $("#Social").html(data);
+                bounty.default({ el:'#Social',value:data.toString() })
             }
         },
         error:function () {
@@ -72,7 +72,7 @@ $(document).ready(function () {
         url:"/Merchants/InstituteCount",
         success:function (data) {
             if(data!=null){
-                $("#Institute").html(data);
+                bounty.default({ el:'#Institute',value:data.toString() })
             }
         },
         error:function () {

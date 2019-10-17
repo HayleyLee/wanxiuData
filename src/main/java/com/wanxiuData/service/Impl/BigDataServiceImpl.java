@@ -27,8 +27,9 @@ public class BigDataServiceImpl implements BigDataService {
     @Override
     public Integer CountAllService() {
         Integer countService = bigDataMapper.CountService();
-        Integer all = pbxMapper.findAll();
-        Integer finale = countService+all;
+        Integer outCall = pbxMapper.findOutCall();
+        Integer inCall = pbxMapper.findInCall();
+        Integer finale = countService+outCall+inCall;
         if(finale>0){
             return finale;
         }else {
